@@ -1,38 +1,57 @@
 {
-  "npmScope": "nx-commerce",
-  "affected": {
-    "defaultBase": "master"
-  },
-  "implicitDependencies": {
-    "package.json": {
-      "dependencies": "*",
-      "devDependencies": "*"
+    "npmScope": "nx-commerce",
+    "affected": {
+        "defaultBase": "master"
     },
-    ".eslintrc.json": "*"
-  },
-  "tasksRunnerOptions": {
-    "default": {
-      "runner": "@nrwl/workspace/tasks-runners/default",
-      "options": {
-        "cacheableOperations": ["build", "lint", "test", "e2e"]
-      }
-    }
-  },
-  "targetDependencies": {
-    "build": [
-      {
-        "target": "build",
-        "projects": "dependencies"
-      }
-    ]
-  },
-  "projects": {
-    "ng-commerce": {
-      "tags": []
+    "implicitDependencies": {
+        "package.json": {
+            "dependencies": "*",
+            "devDependencies": "*"
+        },
+        ".eslintrc.json": "*"
     },
-    "ng-commerce-e2e": {
-      "tags": [],
-      "implicitDependencies": ["ng-commerce"]
+    "tasksRunnerOptions": {
+        "default": {
+            "runner": "@nrwl/workspace/tasks-runners/default",
+            "options": {
+                "cacheableOperations": ["build", "lint", "test", "e2e"]
+            }
+        }
+    },
+    "targetDependencies": {
+        "build": [
+            {
+                "target": "build",
+                "projects": "dependencies"
+            }
+        ]
+    },
+    "projects": {
+        "ng-commerce": {
+            "tags": []
+        },
+        "ng-commerce-e2e": {
+            "tags": [],
+            "implicitDependencies": ["ng-commerce"]
+        },
+        "ng-dashboard": {
+            "tags": []
+        },
+        "ng-dashboard-e2e": {
+            "tags": [],
+            "implicitDependencies": ["ng-dashboard"]
+        },
+        "orders": {
+            "tags": []
+        },
+        "products": {
+            "tags": []
+        },
+        "ui": {
+            "tags": []
+        },
+        "users": {
+            "tags": []
+        }
     }
-  }
 }
