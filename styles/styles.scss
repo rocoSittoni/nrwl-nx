@@ -1,10 +1,11 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
 $primary: #3f51b5;
-$secondary: #ff4081;
-$tertiary: #f44336;
-$background: #D7D8C9;
-$cards: white;
+$accent: #ff4081;
+$warn: #f44336;
+$surface-a: white;
+$surface-b: #D7D8C9;
+$surface-c: #272e4f;
 
 html, body {
     width: 100%;
