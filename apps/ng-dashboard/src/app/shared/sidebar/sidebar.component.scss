@@ -1,0 +1,57 @@
+@import '../../../../../../styles/styles.scss';
+
+.sidebar {
+    width: 175px;
+    height: 100%;
+    position: fixed;
+    background-color: $surface-c;
+    top: 0;
+}
+
+.logo {
+    width: 80%;
+    padding: 10px 10%;
+}
+
+img {
+    max-width: 100%;
+}
+
+.links {
+    ul {
+        margin: 0;
+        padding: 0;
+    }
+
+    li {
+        display: block;
+        list-style: none;
+        width: 100%;
+
+        a {
+            // width: 165px;
+            width: 80%;
+            padding: 10px 10%;
+            // padding: 10px 0px 10px 10px;
+            display: block;
+            color: $surface-a;
+
+            &:hover {
+                background-color: $primary;
+            }
+
+            // i {
+            //     margin-right: 5px;
+            //     margin-top: 0;
+            //     float: left;
+            // }
+
+            &.logout {
+                color: $primary;
+                &:hover {
+                    color: $surface-a;
+                }
+            }
+        }
+    }
+}
