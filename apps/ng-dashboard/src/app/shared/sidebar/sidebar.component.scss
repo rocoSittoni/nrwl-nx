@@ -9,8 +9,8 @@
 }
 
 .logo {
-    width: 80%;
-    padding: 10px 10%;
+    width: 100%;
+    padding: 15px 0px;
 }
 
 img {
@@ -29,22 +29,17 @@ img {
         width: 100%;
 
         a {
-            // width: 165px;
-            width: 80%;
-            padding: 10px 10%;
-            // padding: 10px 0px 10px 10px;
+            width: 100%;
+            padding: 3px 0px 3px 30px;
             display: block;
+            text-align: left;
+            font-size: 1rem;
             color: $surface-a;
+            background-color: $surface-c;
 
             &:hover {
                 background-color: $primary;
             }
-
-            // i {
-            //     margin-right: 5px;
-            //     margin-top: 0;
-            //     float: left;
-            // }
 
             &.logout {
                 color: $primary;
@@ -54,4 +49,13 @@ img {
             }
         }
     }
+}
+
+button.mat-button .mat-icon,
+a.mat-button .mat-icon,
+a.mat-raised-button .mat-icon,
+a.mat-flat-button .mat-icon,
+a.mat-stroked-button .mat-icon {
+  vertical-align: top;
+  font-size: 1.25em;
 }
