@@ -1,0 +1,31 @@
+@import '../../../../../../styles/styles.scss';
+
+// .mat-toolbar-single-row {
+//     background-color: $surface-b;
+// }
+
+a {
+    width: 5%;
+    padding: 0 0 0 5px;
+    display: block;
+    text-align: left;
+    font-size: 1rem;
+}
+.mat-flat-button {
+    background-color: $success;
+    color: white;
+}
+
+button.mat-button .mat-icon,
+a.mat-button .mat-icon,
+a.mat-raised-button .mat-icon,
+a.mat-flat-button .mat-icon,
+a.mat-stroked-button .mat-icon {
+    vertical-align: top;
+    font-size: 1.25em;
+}
+
+table {
+    width: 100%;
+    margin-top: 15px;
+}
