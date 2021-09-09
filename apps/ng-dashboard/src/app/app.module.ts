@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
-import { MaterialModule } from '../../../../libs/ui/src/lib/material.module';
+import { HttpClientModule } from '@angular/common/http';
+import { MaterialModule } from '@nx-commerce/ui';
 
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
@@ -11,6 +12,8 @@ import { ProductsComponent } from './pages/products/products.component';
 import { CategoriesComponent } from './pages/categories/categories.component';
 import { UsersComponent } from './pages/users/users.component';
 import { OrdersComponent } from './pages/orders/orders.component';
+
+import { CategoriesService } from '@nx-commerce/products';
 
 @NgModule({
     declarations: [
@@ -26,9 +29,12 @@ import { OrdersComponent } from './pages/orders/orders.component';
     imports: [
         BrowserModule,
         AppRoutingModule,
+        HttpClientModule,
         MaterialModule
     ],
-    providers: [],
+    providers: [
+        CategoriesService
+    ],
     bootstrap: [AppComponent]
 })
 export class AppModule {}
