@@ -1,0 +1,37 @@
+<div class="categories-wrapper">
+    <mat-card>
+        <mat-card-title>Add Category</mat-card-title>
+        <mat-card-subtitle>You can add edit or remove categories here</mat-card-subtitle>
+        <mat-toolbar>
+            <!-- <span class="example-spacer"></span> -->
+            <a mat-flat-button class="create-btn" (click)="onSubmit()">
+                <mat-icon inline=true aria-hidden="false" aria-label="Example home icon">
+                    add
+                </mat-icon>Create
+            </a>
+            <a mat-flat-button class="delete-btn">
+                <mat-icon inline=true aria-hidden="false" aria-label="Example home icon">
+                    delete
+                </mat-icon>Delete
+            </a>
+        </mat-toolbar>
+        <form class="category-form" [formGroup]="categoryForm">
+            <div class="form-div">
+                <mat-form-field class="form-1" appearance="fill">
+                    <mat-label for="name">Name</mat-label>
+                    <input matInput formControlName="name">
+                    <mat-error *ngIf="categoryForm.controls.name.invalid">Name is required</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="form-div">
+                <mat-form-field class="form-2" appearance="fill">
+                    <mat-label for="icon">Icon</mat-label>
+                    <input matInput formControlName="icon">
+                    <mat-error *ngIf="categoryForm.controls.icon.invalid">Icon is required</mat-error>
+                </mat-form-field>
+            </div>
+        </form>
+    </mat-card>
+</div>
+
+

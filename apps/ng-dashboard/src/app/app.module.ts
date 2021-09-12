@@ -3,6 +3,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { MaterialModule } from '@nx-commerce/ui';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
@@ -14,6 +17,7 @@ import { UsersComponent } from './pages/users/users.component';
 import { OrdersComponent } from './pages/orders/orders.component';
 
 import { CategoriesService } from '@nx-commerce/products';
+import { CategoriesFormComponent } from './pages/categories/categories-form/categories-form.component';
 
 @NgModule({
     declarations: [
@@ -24,13 +28,17 @@ import { CategoriesService } from '@nx-commerce/products';
         ProductsComponent,
         CategoriesComponent,
         UsersComponent,
-        OrdersComponent
+        OrdersComponent,
+        CategoriesFormComponent
     ],
     imports: [
         BrowserModule,
+        BrowserAnimationsModule,
         AppRoutingModule,
         HttpClientModule,
-        MaterialModule
+        MaterialModule,
+        FormsModule,
+        ReactiveFormsModule
     ],
     providers: [
         CategoriesService
