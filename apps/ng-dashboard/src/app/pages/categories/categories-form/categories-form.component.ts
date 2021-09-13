@@ -68,11 +68,4 @@ export class CategoriesFormComponent implements OnInit {
     console.log(this.categoryForm.value);
   }
 
-  // openSnackBar() {
-  //   this._snackBar.open('I am a fucking snackbar!!', 'Fuck you', {
-  //     horizontalPosition: this.horizontalPosition,
-  //     verticalPosition: this.verticalPosition,
-  //   });
-  // }
-
 }

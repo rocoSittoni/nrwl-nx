@@ -13,11 +13,19 @@ export class CategoriesService {
   }
 
   getCategories(): Observable<Category[]> {
-    return this.http.get<Category[]>('http://localhost:3000/api/v1/categories')
+    return this.http.get<Category[]>('http://localhost:3000/api/v1/categories');
   }
 
   createCategory(category: Category): Observable<Category> {
-      return this.http.post<Category>('http://localhost:3000/api/v1/categories', category)
+    return this.http.post<Category>('http://localhost:3000/api/v1/categories', category);
   }
+  
+  // editCategory(categoryId: string): Observable<Object> {
+  //   return this.http.put<Object>(`http://localhost:3000/api/v1/categories/${categoryId}`);
+  // }
+
+  deleteCategory(categoryId: string):Observable<unknown> {
+    return this.http.delete<unknown>(`http://localhost:3000/api/v1/categories/${categoryId}`);
+  } 
 
 }

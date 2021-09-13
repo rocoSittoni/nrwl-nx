@@ -18,6 +18,7 @@ import { OrdersComponent } from './pages/orders/orders.component';
 
 import { CategoriesService } from '@nx-commerce/products';
 import { CategoriesFormComponent } from './pages/categories/categories-form/categories-form.component';
+import { ConfirmDialogComponent } from './pages/categories/confirm-dialog/confirm-dialog.component';
 
 @NgModule({
     declarations: [
@@ -29,7 +30,8 @@ import { CategoriesFormComponent } from './pages/categories/categories-form/cate
         CategoriesComponent,
         UsersComponent,
         OrdersComponent,
-        CategoriesFormComponent
+        CategoriesFormComponent,
+        ConfirmDialogComponent
     ],
     imports: [
         BrowserModule,

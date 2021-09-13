@@ -3,6 +3,10 @@
 // .mat-toolbar-single-row {
 //     background-color: $surface-b;
 // }
+table {
+    width: 100%;
+    margin-top: 15px;
+}
 
 a {
     width: 5%;
@@ -25,7 +29,12 @@ a.mat-stroked-button .mat-icon {
     font-size: 1.25em;
 }
 
-table {
-    width: 100%;
-    margin-top: 15px;
+.action {
+    display: inline;
+    padding: 8px;
+    margin: 5px;
+}
+
+.actions-header .actions-cell{
+    text-align: center;
 }
