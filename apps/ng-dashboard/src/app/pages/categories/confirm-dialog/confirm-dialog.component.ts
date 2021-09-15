@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { confirmDialogData } from '@nx-commerce/ui';
 
 @Component({
   selector: 'app-confirm-dialog',
@@ -7,15 +9,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ConfirmDialogComponent implements OnInit {
 
-  deleteCategory: boolean = false;
-
-  constructor() { }
+  constructor(@Inject(MAT_DIALOG_DATA) public data: confirmDialogData) { }
 
   ngOnInit(): void {
-  }
-
-  confirm() {
-    this.deleteCategory = true;
   }
 
 }

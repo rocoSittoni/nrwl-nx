@@ -12,6 +12,10 @@ export class CategoriesService {
 
   }
 
+  getCategory(categoryId): Observable<Category> {
+    return this.http.get<Category>(`http://localhost:3000/api/v1/categories/${categoryId}`);
+  }
+
   getCategories(): Observable<Category[]> {
     return this.http.get<Category[]>('http://localhost:3000/api/v1/categories');
   }
@@ -20,9 +24,9 @@ export class CategoriesService {
     return this.http.post<Category>('http://localhost:3000/api/v1/categories', category);
   }
   
-  // editCategory(categoryId: string): Observable<Object> {
-  //   return this.http.put<Object>(`http://localhost:3000/api/v1/categories/${categoryId}`);
-  // }
+  updateCategory(category: Category): Observable<Category> {
+    return this.http.put<Category>(`http://localhost:3000/api/v1/categories/${category.id}`, category);
+  }
 
   deleteCategory(categoryId: string):Observable<unknown> {
     return this.http.delete<unknown>(`http://localhost:3000/api/v1/categories/${categoryId}`);

@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { CategoriesService, Category } from '@nx-commerce/products';
-// import { Location } from '@angular/common';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
-import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 import { DialogService } from '@nx-commerce/ui';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-categories',
@@ -22,10 +21,10 @@ export class CategoriesComponent implements OnInit {
   constructor(
     private categoriesService: CategoriesService,
     private _snackBar: MatSnackBar,
-    // private location: Location,
     public dialog: MatDialog,
+    private router: Router,
     private dialogService: DialogService
-  ) { console.log(this.categories) }
+  ) { }
   
   ngOnInit(): void {
     this._getCategories();
@@ -36,33 +35,40 @@ export class CategoriesComponent implements OnInit {
       this.categories = catgs;
     });
   }
-    // editCategory(categoryId: string) {
-    //   this.categoriesService.editCategory(categoryId).subscribe()
-    // }  
+    
+  updateCategory(categoryId: string) {
+    this.router.navigateByUrl(`categories/form/${categoryId}`);
+  }  
 
   deleteCategory(categoryId: string) {
-    this.categoriesService.deleteCategory(categoryId).subscribe((response) => {
-
-      this._getCategories();
-      this._snackBar.open('Category deleted', 'Close', {
-        horizontalPosition: 'center',
-        verticalPosition: 'top',
-        duration: 4000,
-        panelClass: 'success-snack'
-      });
-    },
-    (error)=> {
-      this._snackBar.open('Failed to delete category', 'Close', {
-        horizontalPosition: 'center',
-        verticalPosition: 'top',
-        duration: 4000,
-        panelClass: 'failed-snack'
-      });
+    // Display confirmation dialog
+    this.dialogService.confirmDialog({
+      title: "Sure you want to delete this item?",
+      message: "This action can't be undone",
+      confirmText: "Sure",
+      cancelText: "No"
+    }).subscribe((sure) => {
+      // If true delete category and display success snack
+      if (sure) {
+        this.categoriesService.deleteCategory(categoryId).subscribe((response) => {
+        this._getCategories();
+        this._snackBar.open('Category deleted', 'Close', {
+          horizontalPosition: 'center',
+          verticalPosition: 'top',
+          duration: 3000,
+          panelClass: 'success-snack'
+        });
+      },
+      (error)=> {
+        this._snackBar.open('Failed to delete category', 'Close', {
+          horizontalPosition: 'center',
+          verticalPosition: 'top',
+          duration: 3000,
+          panelClass: 'failed-snack'
+        });
+      });};
     });
-  }
-
-  openDialog() {
-    this.dialogService.confirmDialog()
+      
   }
 
 }

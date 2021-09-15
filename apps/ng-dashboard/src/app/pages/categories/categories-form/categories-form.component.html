@@ -1,12 +1,12 @@
 <div class="categories-wrapper">
     <mat-card>
-        <mat-card-title>Add Category</mat-card-title>
+        <mat-card-title [title]="editMode ? 'Edit Category' : 'Add Category'">{{title}}</mat-card-title>
         <mat-card-subtitle>You can add edit or remove categories here</mat-card-subtitle>
         <mat-toolbar>
             <!-- <span class="example-spacer"></span> -->
-            <a mat-flat-button class="create-btn" (click)="onSubmit()">
+            <a mat-flat-button class="create-btn" [text]="editMode ? 'Update' : 'Create'" (click)="onSubmit()">
                 <mat-icon inline=true aria-hidden="false" aria-label="Example home icon">
-                    add
+                    {{text}}
                 </mat-icon>Create
             </a>
             <a mat-flat-button class="delete-btn">
