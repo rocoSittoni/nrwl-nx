@@ -15,11 +15,11 @@
         "skipDefaultLibCheck": true,
         "baseUrl": ".",
         "paths": {
+            "@env/*": ["environments/*"],
             "@nx-commerce/orders": ["libs/orders/src/index.ts"],
             "@nx-commerce/products": ["libs/products/src/index.ts"],
             "@nx-commerce/ui": ["libs/ui/src/index.ts"],
-            "@nx-commerce/users": ["libs/users/src/index.ts"],
-            "@env/*": ["environments/*"],
+            "@nx-commerce/users": ["libs/users/src/index.ts"]
         }
     },
     "exclude": ["node_modules", "tmp"]
