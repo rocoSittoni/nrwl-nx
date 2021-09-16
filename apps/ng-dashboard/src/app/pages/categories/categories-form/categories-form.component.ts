@@ -17,8 +17,7 @@ export class CategoriesFormComponent implements OnInit {
   verticalPosition: MatSnackBarVerticalPosition = 'bottom';
   editMode: boolean = false;
   currentCategoryId: string = '';
-  title: string = '';
-  text: string = '';
+  pickColors: string[] = ['red', 'blue', 'green', 'orange', 'yellow', 'purple', 'grey'];
   
   constructor(
     private fb: FormBuilder,
@@ -35,6 +34,7 @@ export class CategoriesFormComponent implements OnInit {
   categoryForm = this.fb.group({
     name: ['', Validators.required],
     icon: ['', Validators.required],
+    color: ['#fff', Validators.required]
   });
 
   onSubmit() {
@@ -44,7 +44,8 @@ export class CategoriesFormComponent implements OnInit {
     const category: Category = {
       id: this.currentCategoryId,
       name: this.categoryForm.value.name,
-      icon: this.categoryForm.value.icon
+      icon: this.categoryForm.value.icon,
+      color: this.categoryForm.value.color,
     }
     if (this.editMode) {
       this._updateCategory(category);
@@ -61,19 +62,23 @@ export class CategoriesFormComponent implements OnInit {
     return this.categoryForm.get('icon');
   }
 
+  get color() {
+    return this.categoryForm.get('color');
+  }
+
   private _addCategory(category: Category) {
-    this.categoriesService.createCategory(category).subscribe(response => {
-      this._snackBar.open('Category created!', 'Close', {
+    this.categoriesService.createCategory(category).subscribe((category: Category) => {
+      this._snackBar.open(`Category ${category.name} created!`, 'Close', {
         horizontalPosition: 'center',
         verticalPosition: 'top',
         duration: 3000,
         panelClass: 'success-snack'
       });
-      timer(2000).toPromise().then(done => {
+      timer(1000).toPromise().then(() => {
         this.location.back()
       });
     },
-    (error)=> {
+    ()=> {
       this._snackBar.open('Failed to create category', 'Close', {
         horizontalPosition: 'center',
         verticalPosition: 'top',
@@ -84,18 +89,18 @@ export class CategoriesFormComponent implements OnInit {
   }
 
   private _updateCategory(category: Category) {
-    this.categoriesService.updateCategory(category).subscribe(response => {
-      this._snackBar.open('Category updated!', 'Close', {
+    this.categoriesService.updateCategory(category).subscribe((category: Category) => {
+      this._snackBar.open(`Category ${category.name} updated!`, 'Close', {
         horizontalPosition: 'center',
         verticalPosition: 'top',
         duration: 3000,
         panelClass: 'success-snack'
       });
-      timer(2000).toPromise().then(done => {
+      timer(1000).toPromise().then(() => {
         this.location.back()
       });
     },
-    (error)=> {
+    () => {
       this._snackBar.open('Failed to update category', 'Close', {
         horizontalPosition: 'center',
         verticalPosition: 'top',
@@ -113,6 +118,7 @@ export class CategoriesFormComponent implements OnInit {
         this.categoriesService.getCategory(params.id).subscribe(category => {
           this.categoryForm.value.name.setValue(category.name);
           this.categoryForm.value.icon.setValue(category.icon);
+          this.categoryForm.value.color.setValue(category.color);
         })
       }
     });

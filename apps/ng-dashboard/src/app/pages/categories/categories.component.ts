@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
 export class CategoriesComponent implements OnInit {
   
   categories: Category[] = [];
-  displayedColumns: String[] = ['id', 'name', 'icon', 'actions'];
+  displayedColumns: String[] = ['id', 'name', 'icon', 'color', 'actions'];
 
   horizontalPosition: MatSnackBarHorizontalPosition = 'start';
   verticalPosition: MatSnackBarVerticalPosition = 'bottom';
@@ -50,7 +50,7 @@ export class CategoriesComponent implements OnInit {
     }).subscribe((sure) => {
       // If true delete category and display success snack
       if (sure) {
-        this.categoriesService.deleteCategory(categoryId).subscribe((response) => {
+        this.categoriesService.deleteCategory(categoryId).subscribe( () => {
         this._getCategories();
         this._snackBar.open('Category deleted', 'Close', {
           horizontalPosition: 'center',
@@ -58,15 +58,14 @@ export class CategoriesComponent implements OnInit {
           duration: 3000,
           panelClass: 'success-snack'
         });
-      },
-      (error)=> {
-        this._snackBar.open('Failed to delete category', 'Close', {
-          horizontalPosition: 'center',
-          verticalPosition: 'top',
-          duration: 3000,
-          panelClass: 'failed-snack'
-        });
-      });};
+      }, () => {
+          this._snackBar.open('Failed to delete category', 'Close', {
+            horizontalPosition: 'center',
+            verticalPosition: 'top',
+            duration: 3000,
+            panelClass: 'failed-snack'
+          });
+      }); };
     });
       
   }

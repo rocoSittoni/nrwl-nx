@@ -1,13 +1,16 @@
 <div class="categories-wrapper">
     <mat-card>
-        <mat-card-title [title]="editMode ? 'Edit Category' : 'Add Category'">{{title}}</mat-card-title>
-        <mat-card-subtitle>You can add edit or remove categories here</mat-card-subtitle>
+        <mat-card-title>{{editMode ? 'Edit Category' : 'Add Category'}}</mat-card-title>
+        <mat-card-subtitle>
+        {{editMode ? 'You can edit or delete categories here' : 'You can create or delete categories here'}}
+        </mat-card-subtitle>
         <mat-toolbar>
             <!-- <span class="example-spacer"></span> -->
-            <a mat-flat-button class="create-btn" [text]="editMode ? 'Update' : 'Create'" (click)="onSubmit()">
+            <a mat-flat-button class="create-btn" (click)="onSubmit()">
+                {{editMode ? 'Update' : 'Create'}}
                 <mat-icon inline=true aria-hidden="false" aria-label="Example home icon">
-                    {{text}}
-                </mat-icon>Create
+                    {{editMode ? 'edit' : 'add'}}
+                </mat-icon>
             </a>
             <a mat-flat-button class="delete-btn">
                 <mat-icon inline=true aria-hidden="false" aria-label="Example home icon">
@@ -16,20 +19,28 @@
             </a>
         </mat-toolbar>
         <form class="category-form" [formGroup]="categoryForm">
-            <div class="form-div">
-                <mat-form-field class="form-1" appearance="fill">
-                    <mat-label for="name">Name</mat-label>
-                    <input matInput formControlName="name">
-                    <mat-error *ngIf="categoryForm.controls.name.invalid">Name is required</mat-error>
-                </mat-form-field>
-            </div>
-            <div class="form-div">
-                <mat-form-field class="form-2" appearance="fill">
-                    <mat-label for="icon">Icon</mat-label>
-                    <input matInput formControlName="icon">
-                    <mat-error *ngIf="categoryForm.controls.icon.invalid">Icon is required</mat-error>
-                </mat-form-field>
-            </div>
+
+            <mat-form-field class="form-1" appearance="fill">
+                <mat-label for="name">Name</mat-label>
+                <input matInput formControlName="name">
+                <mat-error *ngIf="categoryForm.controls.name.invalid">Name is required</mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="form-2" appearance="fill">
+                <mat-label for="icon">Icon</mat-label>
+                <input matInput formControlName="icon">
+                <mat-error *ngIf="categoryForm.controls.icon.invalid">Icon is required</mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill">
+              <mat-label for="color">Color</mat-label>
+              <mat-select formControlName="color" name="pick">
+                <mat-option *ngFor="let color of pickColors" [value]="color">
+                  {{color}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
         </form>
     </mat-card>
 </div>

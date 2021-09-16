@@ -44,8 +44,8 @@
               ],
               "fileReplacements": [
                 {
-                  "replace": "apps/ng-commerce/src/environments/environment.ts",
-                  "with": "apps/ng-commerce/src/environments/environment.prod.ts"
+                  "replace": "environments/environment.ts",
+                  "with": "environments/environment.prod.ts"
                 }
               ],
               "outputHashing": "all"
@@ -171,8 +171,8 @@
               ],
               "fileReplacements": [
                 {
-                  "replace": "apps/ng-dashboard/src/environments/environment.ts",
-                  "with": "apps/ng-dashboard/src/environments/environment.prod.ts"
+                  "replace": "environments/environment.ts",
+                  "with": "environments/environment.prod.ts"
                 }
               ],
               "outputHashing": "all"

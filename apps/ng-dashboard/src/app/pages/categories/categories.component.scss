@@ -35,6 +35,16 @@ a.mat-stroked-button .mat-icon {
     margin: 5px;
 }
 
+.delete {
+    color: $surface-a;
+    background-color: $warn;
+}
+
+.edit {
+    color: $surface-a;
+    background-color: $success;
+}
+
 .actions-header .actions-cell{
     text-align: center;
 }

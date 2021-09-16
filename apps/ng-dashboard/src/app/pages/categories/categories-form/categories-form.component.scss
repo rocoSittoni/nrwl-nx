@@ -15,7 +15,7 @@ a.mat-stroked-button .mat-icon {
 
 .mat-flat-button {
     color: white;
-    padding-left: 10px;
+    padding: 0 10px;
 }
 
 .create-btn {
@@ -28,19 +28,17 @@ a.mat-stroked-button .mat-icon {
 }
 
 .category-form {
-    min-width: 150px;
-    max-width: 500px;
     width: 100%;
+    min-width: 150px;
+    max-width: 1200px;
     margin-top: 25px;
 }
 
 .form-1, .form-2 {
-    width: 100%;
-} 
+    min-width: 250px;
+    width: 49%;
+}
 
-// ::ng-deep {
-//     .failed-snack {
-//     background-color: $danger;
-//     color: white;
-//     }
-// }
+mat-form-field.mat-form-field.form-2 {
+    margin-left: 10px;
+}

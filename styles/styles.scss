@@ -5,6 +5,8 @@ $accent: #ff4081;
 $warn: #f44336;
 $success: #38b000;
 $danger: #bb2d3b;
+$dark: black;
+$snack: #656263;
 $surface-a: white;
 $surface-b: #D7D8C9;
 $surface-c: #272e4f;
@@ -22,4 +24,12 @@ body {
 
 a {
     text-decoration: none;
+}
+
+.success-snack {
+    background-color: $snack;
+}
+
+.failed-snack {
+    background-color: $snack;
 }
