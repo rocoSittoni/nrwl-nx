@@ -7,15 +7,15 @@
         <mat-toolbar>
             <!-- <span class="example-spacer"></span> -->
             <a mat-flat-button class="create-btn" (click)="onSubmit()">
-                {{editMode ? 'Update' : 'Create'}}
-                <mat-icon inline=true aria-hidden="false" aria-label="Example home icon">
+                <mat-icon inline=true aria-hidden="false" aria-label="Example home icon" class="createIcon">
                     {{editMode ? 'edit' : 'add'}}
                 </mat-icon>
+                    {{editMode ? 'Update' : 'Create'}}
             </a>
-            <a mat-flat-button class="delete-btn">
-                <mat-icon inline=true aria-hidden="false" aria-label="Example home icon">
-                    delete
-                </mat-icon>Delete
+            <a mat-flat-button class="cancel-btn" (click)="cancel()">
+                <mat-icon inline=true aria-hidden="false" aria-label="Example home icon" class="cancelIcon">
+                    cancel
+                </mat-icon>Cancel
             </a>
         </mat-toolbar>
         <form class="category-form" [formGroup]="categoryForm">
@@ -28,7 +28,11 @@
 
             <mat-form-field class="form-2" appearance="fill">
                 <mat-label for="icon">Icon</mat-label>
-                <input matInput formControlName="icon">
+                <mat-select formControlName="icon" name="pickone">
+                    <mat-option *ngFor="let icon of pickIcons" [value]="icon">
+                      <mat-icon>{{icon}}</mat-icon>
+                    </mat-option>
+                  </mat-select>
                 <mat-error *ngIf="categoryForm.controls.icon.invalid">Icon is required</mat-error>
             </mat-form-field>
 
@@ -36,7 +40,8 @@
               <mat-label for="color">Color</mat-label>
               <mat-select formControlName="color" name="pick">
                 <mat-option *ngFor="let color of pickColors" [value]="color">
-                  {{color}}
+                    <div class="color-picker" [ngStyle]="{'background-color': color}"></div>
+                    {{color}}
                 </mat-option>
               </mat-select>
             </mat-form-field>

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormControl ,Validators } from '@angular/forms';
 import { CategoriesService, Category } from '@nx-commerce/products';
 import { Location } from '@angular/common';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
@@ -17,14 +17,19 @@ export class CategoriesFormComponent implements OnInit {
   verticalPosition: MatSnackBarVerticalPosition = 'bottom';
   editMode: boolean = false;
   currentCategoryId: string = '';
-  pickColors: string[] = ['red', 'blue', 'green', 'orange', 'yellow', 'purple', 'grey'];
+  pickColors: string[] = [
+    'red', 'blue', 'green', 'yellow', 'orange', 'purple', 'turquoise', 'violet', 'pink', 'brown', 'grey'
+  ];
+  pickIcons: string[] = [
+    'code','cloud','business','grade','lunch_dining','sports_esports','build','work','emoji_events','home','pets','directions_car','explore','school'
+  ];
   
   constructor(
     private fb: FormBuilder,
     private categoriesService: CategoriesService,
     private _snackBar: MatSnackBar,
     private location: Location,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
   ) { }
 
   ngOnInit(): void {
@@ -33,9 +38,10 @@ export class CategoriesFormComponent implements OnInit {
 
   categoryForm = this.fb.group({
     name: ['', Validators.required],
-    icon: ['', Validators.required],
-    color: ['#fff', Validators.required]
+    icon: ['work', Validators.required],
+    color: ['black', Validators.required]
   });
+
 
   onSubmit() {
     if(this.categoryForm.invalid) {
@@ -52,6 +58,12 @@ export class CategoriesFormComponent implements OnInit {
     } else {
       this._addCategory(category);
     } 
+  }
+
+  cancel() {
+    timer().toPromise().then(() => {
+      this.location.back();
+    });
   }
 
   get name() {
@@ -78,7 +90,7 @@ export class CategoriesFormComponent implements OnInit {
         this.location.back()
       });
     },
-    ()=> {
+    () => {
       this._snackBar.open('Failed to create category', 'Close', {
         horizontalPosition: 'center',
         verticalPosition: 'top',

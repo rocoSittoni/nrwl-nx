@@ -26,10 +26,10 @@ a {
     text-decoration: none;
 }
 
-.success-snack {
-    background-color: $snack;
-}
-
-.failed-snack {
-    background-color: $snack;
+.success-snack, .failed-snack {
+    color: $surface-a;
+    background-color: $surface-c;
+    button {
+        color: $surface-a;
+    }
 }

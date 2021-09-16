@@ -15,16 +15,28 @@ a.mat-stroked-button .mat-icon {
 
 .mat-flat-button {
     color: white;
-    padding: 0 10px;
+    padding: 0px 10px;    
 }
 
 .create-btn {
     background-color: $success;
+    padding-left: 6px;
 }
 
-.delete-btn {
+.cancel-btn {
     background-color: $danger;
-    margin-left: 10px;
+    margin-left: 8px;
+}
+
+.cancelIcon {
+    margin-right: 3px;
+}
+
+.color-picker {
+    height: 10px;
+    width: 10px;
+    border-radius: 50%;
+    display: inline-flex;
 }
 
 .category-form {
