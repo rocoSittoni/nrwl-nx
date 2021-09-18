@@ -1,0 +1,95 @@
+<div class="products-wrapper">
+    <mat-card>
+        <mat-card-title>{{editMode ? 'Edit Product' : 'Add Product'}}</mat-card-title>
+        <mat-card-subtitle>
+        {{editMode ? 'You can edit or delete products here' : 'You can create or delete products here'}}
+        </mat-card-subtitle>
+        <mat-toolbar>
+            <a mat-flat-button class="create-btn" (click)="onSubmit()">
+                <mat-icon inline=true aria-hidden="false" aria-label="Example home icon" class="createIcon">
+                    {{editMode ? 'edit' : 'add'}}
+                </mat-icon>
+                    {{editMode ? 'Update' : 'Create'}}
+            </a>
+            <a mat-flat-button class="cancel-btn" (click)="onCancel()">
+                <mat-icon inline=true aria-hidden="false" aria-label="Example home icon" class="cancelIcon">
+                    cancel
+                </mat-icon>Cancel
+            </a>
+        </mat-toolbar>
+        <form class="product-form" [formGroup]="productForm">
+
+            <!-- Name -->
+            <mat-form-field class="p-form" appearance="fill">
+                <mat-label for="name">Name</mat-label>
+                <input matInput formControlName="name">
+                <mat-error *ngIf="productForm.controls.name.invalid">Name is required</mat-error>
+            </mat-form-field>
+
+            <!-- Brand -->
+            <mat-form-field class="p-form" appearance="fill">
+                <mat-label for="brand">Brand</mat-label>
+                <input matInput formControlName="brand">
+                <mat-error *ngIf="productForm.controls.brand.invalid">Brand is required</mat-error>
+            </mat-form-field>
+
+            <!-- Price -->
+            <mat-form-field class="p-form" appearance="fill">
+                <mat-label for="price">Price</mat-label>
+                <input matInput formControlName="price">
+                <mat-error *ngIf="productForm.controls.price.invalid">Price is required</mat-error>
+            </mat-form-field>
+
+            <!-- Category -->
+            <mat-form-field class="p-form" appearance="fill">
+                <mat-label for="category">Category</mat-label>
+                <mat-select formControlName="category" name="pickone">
+                    <mat-option *ngFor="let category of categories" [value]="category">
+                      {{category.name}}
+                    </mat-option>
+                  </mat-select>
+                <mat-error *ngIf="productForm.controls.category.invalid">Category is required</mat-error>
+            </mat-form-field>
+
+            <!-- Stock -->
+            <mat-form-field class="p-form" appearance="fill">
+                <mat-label for="countInStock">In Stock</mat-label>
+                <input matInput formControlName="countInStock">
+                <mat-error *ngIf="productForm.controls.name.invalid">Stock n° is required</mat-error>
+            </mat-form-field>
+
+            <!-- Is Featured -->
+            <mat-slide-toggle formControlName="isFeatured" class="is-featured">
+                Is Featured?
+            </mat-slide-toggle>
+
+            <!-- Simple Description -->
+            <mat-form-field class="p-form" appearance="fill">
+                <mat-label for="description">Description</mat-label>
+                <input matInput formControlName="description">
+                <mat-error *ngIf="productForm.controls.description.invalid">Description is required</mat-error>
+            </mat-form-field>
+
+            <!-- Image Upload -->
+            <!-- <mat-form-field class="p-form" appearance="fill"> -->
+                <!-- </mat-form-field> -->
+                
+            
+            <!-- Content Editor -->
+            <quill-editor class="content-editor"
+                          formControlName="richDescription"
+                          [modules]="QuillConfiguration"
+                          [styles]="{'min-height': '120px'}">
+            </quill-editor>
+
+            <div>
+                <mat-label for="image">Image</mat-label>
+                <input type="file" accept="image/*" formControlName="image" (change)="onImageUpload($event)">
+                <div class="small-img">
+                    <img [src]="displayImage" alt="" style="width: 100%;">
+                </div>
+            </div>
+
+        </form>
+    </mat-card>
+</div>

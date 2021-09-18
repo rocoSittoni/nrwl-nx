@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl ,Validators } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { CategoriesService, Category } from '@nx-commerce/products';
 import { Location } from '@angular/common';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
@@ -61,9 +61,7 @@ export class CategoriesFormComponent implements OnInit {
   }
 
   cancel() {
-    timer().toPromise().then(() => {
       this.location.back();
-    });
   }
 
   get name() {

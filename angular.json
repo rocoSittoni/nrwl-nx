@@ -133,8 +133,13 @@
                         "tsConfig": "apps/ng-dashboard/tsconfig.app.json",
                         "inlineStyleLanguage": "scss",
                         "assets": ["apps/ng-dashboard/src/favicon.ico", "apps/ng-dashboard/src/assets"],
-                        "styles": ["apps/ng-dashboard/src/styles.scss"],
-                        "scripts": []
+                        "styles": [
+                            "apps/ng-dashboard/src/styles.scss",
+                            "./node_modules/quill/dist/quill.core.css",
+                            "./node_modules/quill/dist/quill.bubble.css",
+                            "./node_modules/quill/dist/quill.snow.css"
+                        ],
+                        "scripts": ["./node_modules/quill/dist/quill.min.js"]
                     },
                     "configurations": {
                         "production": {

@@ -4,6 +4,7 @@ import { CategoriesFormComponent } from './pages/categories/categories-form/cate
 import { CategoriesComponent } from './pages/categories/categories.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { OrdersComponent } from './pages/orders/orders.component';
+import { ProductsFormComponent } from './pages/products/products-form/products-form.component';
 import { ProductsComponent } from './pages/products/products.component';
 import { UsersComponent } from './pages/users/users.component';
 import { ShellComponent } from './shared/shell/shell.component';
@@ -18,8 +19,10 @@ const routes: Routes = [
       { path: 'categories', component: CategoriesComponent },
       { path: 'orders', component: OrdersComponent },
       { path: 'users', component: UsersComponent },
-      { path: 'categories/form', component: CategoriesFormComponent},
-      { path: 'categories/form/:id', component: CategoriesFormComponent }
+      { path: 'categories/form', component: CategoriesFormComponent },
+      { path: 'categories/form/:id', component: CategoriesFormComponent },
+      { path: 'products/form', component: ProductsFormComponent },
+      { path: 'products/form/:id', component: ProductsFormComponent }
     ]
   },
 ];

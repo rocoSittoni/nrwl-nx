@@ -31,8 +31,8 @@ export class CategoriesComponent implements OnInit {
   }
   
   private _getCategories() {
-    this.categoriesService.getCategories().subscribe((catgs) => {
-      this.categories = catgs;
+    this.categoriesService.getCategories().subscribe((categories) => {
+      this.categories = categories;
     });
   }
     

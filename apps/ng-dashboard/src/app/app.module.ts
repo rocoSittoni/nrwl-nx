@@ -16,9 +16,12 @@ import { CategoriesComponent } from './pages/categories/categories.component';
 import { UsersComponent } from './pages/users/users.component';
 import { OrdersComponent } from './pages/orders/orders.component';
 
-import { CategoriesService } from '@nx-commerce/products';
+import { CategoriesService, ProductsService } from '@nx-commerce/products';
 import { CategoriesFormComponent } from './pages/categories/categories-form/categories-form.component';
 import { ConfirmDialogComponent } from './pages/categories/confirm-dialog/confirm-dialog.component';
+import { ProductsFormComponent } from './pages/products/products-form/products-form.component';
+
+import { QuillModule } from 'ngx-quill';
 
 @NgModule({
     declarations: [
@@ -31,7 +34,8 @@ import { ConfirmDialogComponent } from './pages/categories/confirm-dialog/confir
         UsersComponent,
         OrdersComponent,
         CategoriesFormComponent,
-        ConfirmDialogComponent
+        ConfirmDialogComponent,
+        ProductsFormComponent
     ],
     imports: [
         BrowserModule,
@@ -40,10 +44,12 @@ import { ConfirmDialogComponent } from './pages/categories/confirm-dialog/confir
         HttpClientModule,
         MaterialModule,
         FormsModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        QuillModule.forRoot()
     ],
     providers: [
-        CategoriesService
+        CategoriesService,
+        ProductsService
     ],
     bootstrap: [AppComponent]
 })
