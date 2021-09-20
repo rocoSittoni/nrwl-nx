@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Location } from '@angular/common';
-import { CategoriesService, Category } from '@nx-commerce/products';
+import { CategoriesService, Category, Product, ProductsService } from '@nx-commerce/products';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-products-form',
@@ -18,19 +19,13 @@ export class ProductsFormComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private location: Location,
-    private categoriesService: CategoriesService
+    private categoriesService: CategoriesService,
+    private productsService: ProductsService,
+    private _snackBar: MatSnackBar
   ) { }
 
   ngOnInit(): void {
     this._getCategories();
-  }
-
-  onSubmit() {
-
-  }
-
-  onCancel() {
-    this.location.back();
   }
 
   productForm = this.fb.group({
@@ -41,29 +36,44 @@ export class ProductsFormComponent implements OnInit {
     countInStock: ['', Validators.required, Validators.pattern('/^\d+$/')],
     description: ['', Validators.required],
     richDescription: [''],
-    isFeatured: [''],
+    isFeatured: [false],
     image: [''],
   });
 
-  get _productForm() {
-    return this.productForm.controls;
-  }
-
-  private _getCategories() {
-    this.categoriesService.getCategories().subscribe(categories => {
-      this.categories = categories;
-    });
-  }
-
-  onImageUpload(event) {
-    const file = event.target.files[0];
-    if (file) {
-      const fileReader = new FileReader();
-      fileReader.onload = () => {
-        this.displayImage = fileReader.result
-      } 
-      fileReader.readAsDataURL(file);
+  onSubmit() {
+    this.isSubmited = true;
+    if (this.productForm.invalid) {
+      return;
     }
+    const productFormData = new FormData();
+    Object.keys(this._productForm).map((key) => {
+      productFormData.append(key, this._productForm[key].value);
+    });
+    this._addProduct(productFormData);
+  }
+
+  onCancel() {
+    this.location.back();
+  }
+
+  private _addProduct(productData: FormData) {
+    this.productsService.createProduct(productData).subscribe((product: Product) => {
+      this._snackBar.open(`Product ${product.name} created!`, 'Close', {
+        horizontalPosition: 'center',
+        verticalPosition: 'top',
+        duration: 3000,
+        panelClass: 'success-snack'
+      });
+        this.location.back()
+    },
+    () => {
+      this._snackBar.open('Failed to create product', 'Close', {
+        horizontalPosition: 'center',
+        verticalPosition: 'top',
+        duration: 4000,
+        panelClass: 'failed-snack'
+      });
+    });
   }
 
   public QuillConfiguration = {
@@ -78,5 +88,27 @@ export class ProductsFormComponent implements OnInit {
     ],
   }
 
+  onImageUpload(event) {
+    const file = event.target.files[0];
+    if (file) {
+      this.productForm.patchValue({image: file});
+      this.productForm.get('image').updateValueAndValidity();
+      const fileReader = new FileReader();
+      fileReader.onload = () => {
+        this.displayImage = fileReader.result
+      } 
+      fileReader.readAsDataURL(file);
+    }
+  }
+
+  get _productForm() {
+    return this.productForm.controls;
+  }
+
+  private _getCategories() {
+    this.categoriesService.getCategories().subscribe((categories) => {
+      this.categories = categories;
+    });
+  }
 
 }

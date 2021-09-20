@@ -43,8 +43,8 @@
             <!-- Category -->
             <mat-form-field class="p-form" appearance="fill">
                 <mat-label for="category">Category</mat-label>
-                <mat-select formControlName="category" name="pickone">
-                    <mat-option *ngFor="let category of categories" [value]="category">
+                <mat-select formControlName="category">
+                    <mat-option *ngFor="let category of categories" [value]="category.id">
                       {{category.name}}
                     </mat-option>
                   </mat-select>
@@ -55,7 +55,7 @@
             <mat-form-field class="p-form" appearance="fill">
                 <mat-label for="countInStock">In Stock</mat-label>
                 <input matInput formControlName="countInStock">
-                <mat-error *ngIf="productForm.controls.name.invalid">Stock n° is required</mat-error>
+                <mat-error *ngIf="productForm.controls.name.invalid">N° in Stock is required</mat-error>
             </mat-form-field>
 
             <!-- Is Featured -->
@@ -67,24 +67,20 @@
             <mat-form-field class="p-form" appearance="fill">
                 <mat-label for="description">Description</mat-label>
                 <input matInput formControlName="description">
-                <mat-error *ngIf="productForm.controls.description.invalid">Description is required</mat-error>
+                <mat-error *ngIf="productForm.controls.description.invalid && isSubmited">Description is required</mat-error>
             </mat-form-field>
 
-            <!-- Image Upload -->
-            <!-- <mat-form-field class="p-form" appearance="fill"> -->
-                <!-- </mat-form-field> -->
-                
-            
             <!-- Content Editor -->
             <quill-editor class="content-editor"
                           formControlName="richDescription"
                           [modules]="QuillConfiguration"
                           [styles]="{'min-height': '120px'}">
             </quill-editor>
-
+        
+            <!-- Image Upload -->
             <div>
                 <mat-label for="image">Image</mat-label>
-                <input type="file" accept="image/*" formControlName="image" (change)="onImageUpload($event)">
+                <input type="file" accept="image/*" (change)="onImageUpload($event)">
                 <div class="small-img">
                     <img [src]="displayImage" alt="" style="width: 100%;">
                 </div>
