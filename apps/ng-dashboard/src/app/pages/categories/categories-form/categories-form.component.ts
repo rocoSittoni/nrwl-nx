@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { CategoriesService, Category } from '@nx-commerce/products';
 import { Location } from '@angular/common';
-import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { timer } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 
@@ -13,8 +13,6 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class CategoriesFormComponent implements OnInit {
 
-  horizontalPosition: MatSnackBarHorizontalPosition = 'start';
-  verticalPosition: MatSnackBarVerticalPosition = 'bottom';
   editMode: boolean = false;
   currentCategoryId: string = '';
   pickColors: string[] = [
@@ -33,48 +31,14 @@ export class CategoriesFormComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this._checkEditMode()
+    this._checkEditMode();
   }
 
   categoryForm = this.fb.group({
     name: ['', Validators.required],
-    icon: ['work', Validators.required],
+    icon: ['code', Validators.required],
     color: ['black', Validators.required]
   });
-
-
-  onSubmit() {
-    if(this.categoryForm.invalid) {
-      return;
-    }
-    const category: Category = {
-      id: this.currentCategoryId,
-      name: this.categoryForm.value.name,
-      icon: this.categoryForm.value.icon,
-      color: this.categoryForm.value.color,
-    }
-    if (this.editMode) {
-      this._updateCategory(category);
-    } else {
-      this._addCategory(category);
-    } 
-  }
-
-  cancel() {
-      this.location.back();
-  }
-
-  get name() {
-    return this.categoryForm.get('name');
-  }
-  
-  get icon() {
-    return this.categoryForm.get('icon');
-  }
-
-  get color() {
-    return this.categoryForm.get('color');
-  }
 
   private _addCategory(category: Category) {
     this.categoriesService.createCategory(category).subscribe((category: Category) => {
@@ -120,18 +84,43 @@ export class CategoriesFormComponent implements OnInit {
     });
   }
 
+  get _categoryForm() {
+    return this.categoryForm.controls;
+  }
+
   private _checkEditMode() {
     this.activatedRoute.params.subscribe(params => {
       if(params.id) {
         this.editMode = true;
         this.currentCategoryId = params.id;
         this.categoriesService.getCategory(params.id).subscribe(category => {
-          this.categoryForm.value.name.setValue(category.name);
-          this.categoryForm.value.icon.setValue(category.icon);
-          this.categoryForm.value.color.setValue(category.color);
+          this._categoryForm.name.setValue(category.name);
+          this._categoryForm.icon.setValue(category.icon);
+          this._categoryForm.color.setValue(category.color);
         })
       }
     });
+  }
+
+  onSubmit() {
+    if(this.categoryForm.invalid) {
+      return;
+    }
+    const category: Category = {
+      id: this.currentCategoryId,
+      name: this.categoryForm.value.name,
+      icon: this.categoryForm.value.icon,
+      color: this.categoryForm.value.color,
+    }
+    if (this.editMode) {
+      this._updateCategory(category);
+    } else {
+      this._addCategory(category);
+    } 
+  }
+
+  cancel() {
+    this.location.back();
   }
 
 }

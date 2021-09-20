@@ -3,6 +3,9 @@
 @import '~quill/dist/quill.bubble.css';
 @import '~quill/dist/quill.snow.css';
 
+mat-card {
+    padding: 15px 15px 0px 15px;
+}
 
 mat-toolbar {
     justify-content: right;
@@ -33,14 +36,14 @@ a.mat-stroked-button .mat-icon {
 }
 
 .cancelIcon {
-    margin-right: 3px;
+    margin-right: 2px;
 }
 
 .product-form {
     width: 100%;
     min-width: 150px;
     max-width: 1200px;
-    margin-top: 25px;
+    margin-top: 15px;
 }
 
 .p-form {
@@ -48,22 +51,70 @@ a.mat-stroked-button .mat-icon {
     width: 49%;
 }
 
-// mat-form-field {
-
-// }
-// .form-1, .form-2 {
-//     min-width: 250px;
-//     width: 49%;
-// }
-
 mat-form-field.mat-form-field.p-form {
-    margin-left: 10px;
+    margin-left: 20px;
+}
+
+mat-form-field.mat-form-field {
+    &.name, &.price, &.in-stock {
+        margin: 2px 0px
+    }
+}
+
+.bottom-div {
+    width: 100%;
+    display: inline-flex;
+    justify-content: start;
+    margin-top: 18px;
+}
+
+.p-form-img {
+    width: 130px;
+}
+
+.form-img {
+    width: 100px;
+}
+
+.select-image {
+    margin-right: 5px;
+}
+
+.custom-file-input {
+    color: transparent;
+}
+.custom-file-input::-webkit-file-upload-button {
+  visibility: hidden;
+}
+.custom-file-input::before {
+  content: 'Select Image';
+  color: black;
+  display: inline-block;
+  background: -webkit-linear-gradient(top, #f9f9f9, #e3e3e3);
+  border: 1px solid #999;
+  border-radius: 3px;
+  padding: 5px 8px;
+  outline: none;
+  white-space: nowrap;
+  cursor: pointer;
+  text-shadow: 1px 1px #fff;
+  font-weight: 500;
+  font-size: 14px;
+}
+.custom-file-input:hover::before {
+  border-color: black;
+}
+.custom-file-input:active {
+  outline: 0;
+}
+.custom-file-input:active::before {
+  background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9); 
+}
+
+.small-img {
+    width: 100%;
 }
 
 .is-featured {
     margin-left: 15px;
-}
-
-.small-img {
-    width: 100px;
 }

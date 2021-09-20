@@ -1,8 +1,8 @@
 <div class="categories-wrapper">
     <mat-card>
-        <mat-card-title>{{editMode ? 'Edit Category' : 'Add Category'}}</mat-card-title>
+        <mat-card-title>{{editMode ? 'Edit Category' : 'Create Category'}}</mat-card-title>
         <mat-card-subtitle>
-        {{editMode ? 'You can edit or delete categories here' : 'You can create or delete categories here'}}
+        {{editMode ? 'You can edit categories here' : 'You can create categories here'}}
         </mat-card-subtitle>
         <mat-toolbar>
             <!-- <span class="example-spacer"></span> -->
@@ -14,7 +14,7 @@
             </a>
             <a mat-flat-button class="cancel-btn" (click)="cancel()">
                 <mat-icon inline=true aria-hidden="false" aria-label="Example home icon" class="cancelIcon">
-                    cancel
+                    clear
                 </mat-icon>Cancel
             </a>
         </mat-toolbar>

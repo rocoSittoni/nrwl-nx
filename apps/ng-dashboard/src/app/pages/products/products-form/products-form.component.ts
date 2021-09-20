@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Location } from '@angular/common';
 import { CategoriesService, Category, Product, ProductsService } from '@nx-commerce/products';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-products-form',
@@ -15,30 +16,37 @@ export class ProductsFormComponent implements OnInit {
   isSubmited: boolean = false;
   categories: Category[] = [];
   displayImage: string | ArrayBuffer = '';
+  currentProductId: string = '';
+  productForm: FormGroup
 
   constructor(
     private fb: FormBuilder,
     private location: Location,
     private categoriesService: CategoriesService,
     private productsService: ProductsService,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    private activatedRoute: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
+    this._initForm();
     this._getCategories();
+    this._checkEditMode();
   }
 
-  productForm = this.fb.group({
-    name: ['', Validators.required],
-    brand: ['', Validators.required],
-    price: ['', Validators.required, Validators.pattern('/^\d+$/')],
-    category: ['', Validators.required],
-    countInStock: ['', Validators.required, Validators.pattern('/^\d+$/')],
-    description: ['', Validators.required],
-    richDescription: [''],
-    isFeatured: [false],
-    image: [''],
-  });
+  private _initForm() {
+    this.productForm = this.fb.group({
+      name: ['', Validators.required],
+      brand: ['', Validators.required],
+      price: ['', Validators.required],
+      category: ['', Validators.required],
+      countInStock: ['', Validators.required],
+      description: ['', Validators.required],
+      richDescription: [''],
+      isFeatured: [false],
+      image: [''],
+    });
+  }
 
   onSubmit() {
     this.isSubmited = true;
@@ -49,7 +57,11 @@ export class ProductsFormComponent implements OnInit {
     Object.keys(this._productForm).map((key) => {
       productFormData.append(key, this._productForm[key].value);
     });
-    this._addProduct(productFormData);
+    if(this.editMode) {
+      this._updateProduct(productFormData);
+    } else {
+      this._addProduct(productFormData);
+    }
   }
 
   onCancel() {
@@ -58,7 +70,7 @@ export class ProductsFormComponent implements OnInit {
 
   private _addProduct(productData: FormData) {
     this.productsService.createProduct(productData).subscribe((product: Product) => {
-      this._snackBar.open(`Product ${product.name} created!`, 'Close', {
+      this._snackBar.open(`Product created!`, 'Close', {
         horizontalPosition: 'center',
         verticalPosition: 'top',
         duration: 3000,
@@ -76,16 +88,24 @@ export class ProductsFormComponent implements OnInit {
     });
   }
 
-  public QuillConfiguration = {
-    toolbar: [
-      ['bold', 'italic', 'underline', 'strike'],
-      ['blockquote', 'code-block'],
-      [{ list: 'ordered' }, { list: 'bullet' }],
-      [{ header: [1, 2, 3, 4, 5, 6, false] }],
-      [{ color: [] }, { background: [] }],
-      ['link'],
-      ['clean'],
-    ],
+  private _updateProduct(productFormData: FormData) {
+    this.productsService.updateProduct(productFormData, this.currentProductId).subscribe(() => {
+      this._snackBar.open(`Product updated!`, 'Close', {
+        horizontalPosition: 'center',
+        verticalPosition: 'top',
+        duration: 3000,
+        panelClass: 'success-snack'
+      });
+        this.location.back()
+    },
+    () => {
+      this._snackBar.open('Failed to update category', 'Close', {
+        horizontalPosition: 'center',
+        verticalPosition: 'top',
+        duration: 3000,
+        panelClass: 'failed-snack'
+      });
+    });
   }
 
   onImageUpload(event) {
@@ -109,6 +129,38 @@ export class ProductsFormComponent implements OnInit {
     this.categoriesService.getCategories().subscribe((categories) => {
       this.categories = categories;
     });
+  }
+
+  private _checkEditMode() {
+    this.activatedRoute.params.subscribe(params => {
+      if(params.id) {
+        this.editMode = true;
+        this.currentProductId = params.id;
+        this.productsService.getProduct(params.id).subscribe(product => {
+          this._productForm.name.setValue(product.name);
+          this._productForm.brand.setValue(product.brand);
+          this._productForm.price.setValue(product.price);
+          this._productForm.category.setValue(product.category.id);
+          this._productForm.countInStock.setValue(product.countInStock);
+          this._productForm.description.setValue(product.description);
+          this._productForm.richDescription.setValue(product.richDescription);
+          this._productForm.isFeatured.setValue(product.isFeatured);
+          this.displayImage = product.image;
+        });
+      }
+    });
+  }
+
+  public QuillConfiguration = {
+    toolbar: [
+      ['bold', 'italic', 'underline', 'strike'],
+      ['blockquote', 'code-block'],
+      [{ list: 'ordered' }, { list: 'bullet' }],
+      [{ header: [1, 2, 3, 4, 5, 6, false] }],
+      [{ color: [] }, { background: [] }],
+      ['link'],
+      ['clean'],
+    ],
   }
 
 }
