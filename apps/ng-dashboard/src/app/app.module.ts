@@ -23,6 +23,7 @@ import { ProductsFormComponent } from './pages/products/products-form/products-f
 
 import { QuillModule } from 'ngx-quill';
 import { UsersFormComponent } from './pages/users/users-form/users-form.component';
+import { OrdersDetailComponent } from './pages/orders/orders-detail/orders-detail.component';
 
 @NgModule({
     declarations: [
@@ -37,7 +38,8 @@ import { UsersFormComponent } from './pages/users/users-form/users-form.componen
         CategoriesFormComponent,
         ConfirmDialogComponent,
         ProductsFormComponent,
-        UsersFormComponent
+        UsersFormComponent,
+        OrdersDetailComponent
     ],
     imports: [
         BrowserModule,

@@ -33,28 +33,6 @@ a.mat-stroked-button .mat-icon {
     font-size: 1.25em;
 }
 
-.is-admin {
-    width: 60px;
-    height: 25px;
-    text-align: center;
-    display: table-cell;
-    vertical-align: middle;
-    background-color: $accent;
-    color: $surface-a;
-    border-radius: 25px;
-}
-
-.is-user {
-    width: 60px;
-    height: 25px;
-    text-align: center;
-    display: table-cell;
-    vertical-align: middle;
-    background-color: $primary;
-    color: $surface-a;
-    border-radius: 25px;
-}
-
 .action {
     display: inline;
     padding: 8px;

@@ -35,8 +35,10 @@
                <ng-container matColumnDef="isAdmin">
                 <th mat-header-cell *matHeaderCellDef> Role </th>
                 <td mat-cell *matCellDef="let users">
-                    <div *ngIf="users.isAdmin" class="is-admin">Admin</div>
-                    <div *ngIf="!users.isAdmin" class="is-user">User</div>
+                  <mat-chip-list>
+                    <mat-chip selected *ngIf="users.isAdmin" color="accent">Admin</mat-chip>
+                    <mat-chip selected *ngIf="!users.isAdmin" color="primary">User</mat-chip>
+                  </mat-chip-list>
                 </td>
               </ng-container>
 
