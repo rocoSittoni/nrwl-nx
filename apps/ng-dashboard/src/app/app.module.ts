@@ -22,6 +22,7 @@ import { ConfirmDialogComponent } from './pages/categories/confirm-dialog/confir
 import { ProductsFormComponent } from './pages/products/products-form/products-form.component';
 
 import { QuillModule } from 'ngx-quill';
+import { UsersFormComponent } from './pages/users/users-form/users-form.component';
 
 @NgModule({
     declarations: [
@@ -35,7 +36,8 @@ import { QuillModule } from 'ngx-quill';
         OrdersComponent,
         CategoriesFormComponent,
         ConfirmDialogComponent,
-        ProductsFormComponent
+        ProductsFormComponent,
+        UsersFormComponent
     ],
     imports: [
         BrowserModule,

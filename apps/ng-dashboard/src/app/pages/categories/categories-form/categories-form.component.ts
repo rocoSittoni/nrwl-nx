@@ -3,7 +3,6 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { CategoriesService, Category } from '@nx-commerce/products';
 import { Location } from '@angular/common';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { timer } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -48,9 +47,7 @@ export class CategoriesFormComponent implements OnInit {
         duration: 3000,
         panelClass: 'success-snack'
       });
-      timer(1000).toPromise().then(() => {
         this.location.back()
-      });
     },
     () => {
       this._snackBar.open('Failed to create category', 'Close', {
@@ -70,9 +67,7 @@ export class CategoriesFormComponent implements OnInit {
         duration: 3000,
         panelClass: 'success-snack'
       });
-      timer(1000).toPromise().then(() => {
         this.location.back()
-      });
     },
     () => {
       this._snackBar.open('Failed to update category', 'Close', {

@@ -2,7 +2,10 @@
 
 table {
     width: 100%;
-    margin-top: 15px;
+}
+
+mat-form-field {
+    width: 100%;
 }
 
 a {
@@ -49,7 +52,7 @@ a.mat-stroked-button .mat-icon {
 
 .edit {
     color: $surface-a;
-    background-color: $success;
+    background-color: $primary;
 }
 
 .actions-header .actions-cell{

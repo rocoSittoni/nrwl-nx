@@ -1,0 +1,76 @@
+@import '../../../../../../styles/styles.scss';
+
+table {
+    width: 100%;
+}
+
+th, td {
+    width: 20%;
+}
+
+mat-form-field {
+    width: 100%;
+}
+
+a {
+    width: 5%;
+    padding: 0 0 0 5px;
+    display: block;
+    text-align: left;
+    font-size: 1rem;
+}
+.mat-flat-button {
+    background-color: $success;
+    color: white;
+}
+
+button.mat-button .mat-icon,
+a.mat-button .mat-icon,
+a.mat-raised-button .mat-icon,
+a.mat-flat-button .mat-icon,
+a.mat-stroked-button .mat-icon {
+    vertical-align: top;
+    font-size: 1.25em;
+}
+
+.is-admin {
+    width: 60px;
+    height: 25px;
+    text-align: center;
+    display: table-cell;
+    vertical-align: middle;
+    background-color: $accent;
+    color: $surface-a;
+    border-radius: 25px;
+}
+
+.is-user {
+    width: 60px;
+    height: 25px;
+    text-align: center;
+    display: table-cell;
+    vertical-align: middle;
+    background-color: $primary;
+    color: $surface-a;
+    border-radius: 25px;
+}
+
+.action {
+    display: inline;
+    padding: 8px;
+    margin: 5px;
+}
+
+.delete {
+    color: $surface-a;
+    background-color: $warn;
+}
+
+.edit {
+    color: $surface-a;
+    background-color: $primary;
+}
+
+.actions-header .actions-cell{
+    text-align: center;
+}

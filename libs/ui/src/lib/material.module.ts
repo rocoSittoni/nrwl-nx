@@ -14,6 +14,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatChipsModule } from '@angular/material/chips'
 
 const MaterialComponents = [
     MatToolbarModule,
@@ -28,7 +30,9 @@ const MaterialComponents = [
     MatSelectModule,
     MatOptionModule,
     MatSlideToggleModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    MatPaginatorModule,
+    MatChipsModule
 ];
 
 @NgModule({

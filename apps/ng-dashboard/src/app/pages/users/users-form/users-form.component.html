@@ -1,0 +1,87 @@
+<div class="users-wrapper">
+    <mat-card>
+        <mat-card-title>{{editMode ? 'Edit User' : 'Create User'}}</mat-card-title>
+        <mat-card-subtitle>
+        {{editMode ? 'You can edit users here' : 'You can create users here'}}
+        </mat-card-subtitle>
+        <mat-toolbar>
+            <!-- <span class="example-spacer"></span> -->
+            <a mat-flat-button class="create-btn" (click)="onSubmit()">
+                <mat-icon inline=true aria-hidden="false" aria-label="Example home icon" class="createIcon">
+                    {{editMode ? 'edit' : 'add'}}
+                </mat-icon>
+                    {{editMode ? 'Update' : 'Create'}}
+            </a>
+            <a mat-flat-button class="cancel-btn" (click)="cancel()">
+                <mat-icon inline=true aria-hidden="false" aria-label="Example home icon" class="cancelIcon">
+                    clear
+                </mat-icon>Cancel
+            </a>
+        </mat-toolbar>
+        <form class="user-form" [formGroup]="userForm">
+
+            <mat-form-field class="name u-form" appearance="fill">
+                <mat-label for="name">Name</mat-label>
+                <input matInput formControlName="name">
+                <mat-error *ngIf="userForm.controls.name.invalid">Name is required</mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="email u-form" appearance="fill">
+                <mat-label for="email">Email</mat-label>
+                <input matInput formControlName="email">
+                <mat-error *ngIf="userForm.controls.email.invalid">
+                    Valid email is required
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="password u-form" appearance="fill">
+                <mat-label for="password">Password</mat-label>
+                <input matInput formControlName="password" type="password">
+                <mat-error *ngIf="userForm.controls.password.invalid">Password is required</mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="phone u-form" appearance="fill">
+                <mat-label for="phone">Phone</mat-label>
+                <input matInput formControlName="phone" type="number">
+                <mat-error *ngIf="userForm.controls.phone.invalid">Phone is required</mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="street u-form" appearance="fill">
+                <mat-label for="phone">Street</mat-label>
+                <input matInput formControlName="street" type="text">
+                <mat-error *ngIf="userForm.controls.street.invalid">Street is required</mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="apartment u-form" appearance="fill">
+                <mat-label for="apartment">Apartment</mat-label>
+                <input matInput formControlName="apartment" type="text">
+                <mat-error *ngIf="userForm.controls.apartment.invalid">Apartment is required</mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="zip u-form" appearance="fill">
+                <mat-label for="zip">Zip</mat-label>
+                <input matInput formControlName="zip" type="number">
+                <mat-error *ngIf="userForm.controls.zip.invalid">Zip is required</mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="city u-form" appearance="fill">
+                <mat-label for="city">City</mat-label>
+                <input matInput formControlName="city" type="text">
+                <mat-error *ngIf="userForm.controls.city.invalid">City is required</mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="country u-form" appearance="fill">
+                <mat-label for="country">Country</mat-label>
+                <input matInput formControlName="country" type="text">
+                <mat-error *ngIf="userForm.controls.country.invalid">Country is required</mat-error>
+            </mat-form-field>
+
+            <mat-slide-toggle formControlName="isAdmin" class="is-admin">
+                Admin
+            </mat-slide-toggle>
+
+        </form>
+    </mat-card>
+</div>
+
+

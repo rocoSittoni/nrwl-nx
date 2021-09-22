@@ -44,7 +44,7 @@ export class ProductsFormComponent implements OnInit {
       description: ['', Validators.required],
       richDescription: [''],
       isFeatured: [false],
-      image: [''],
+      image: ['', Validators.required],
     });
   }
 
@@ -146,10 +146,19 @@ export class ProductsFormComponent implements OnInit {
           this._productForm.richDescription.setValue(product.richDescription);
           this._productForm.isFeatured.setValue(product.isFeatured);
           this.displayImage = product.image;
+          this._productForm.image.setValidators([]);
+          this._productForm.image.updateValueAndValidity();
         });
       }
     });
   }
+
+  numbersOnly(event) {
+    const input = String.fromCharCode(event.keyCode);
+    if (!/^[0-9]*$/.test(input)) {
+        event.preventDefault();
+    }
+}
 
   public QuillConfiguration = {
     toolbar: [
