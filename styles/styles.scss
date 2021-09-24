@@ -1,14 +1,14 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
-$primary: #3f51b5;
-$accent: #ff4081;
-$warn: #f44336;
-$success: #38b000;
-$danger: #bb2d3b;
+$primary: #657ee4;
+$accent: #f0457e;
+$warn: #ed4c51;
+$success: #349172;
 $dark: black;
 $surface-a: white;
 $surface-b: #D7D8C9;
-$surface-c: #272e4f;
+$surface-c: #1a1d24;
+$c-hover: rgba(87, 93, 107, 0.2);
 
 html, body {
     width: 100%;
@@ -25,9 +25,17 @@ a {
     text-decoration: none;
 }
 
-.success-snack, .failed-snack {
+.success-snack {
     color: $surface-a;
-    background-color: $surface-c;
+    background-color: $success;
+    button {
+        color: $surface-a;
+    }
+}
+
+.failed-snack {
+    color: $surface-a;
+    background-color: $warn;
     button {
         color: $surface-a;
     }

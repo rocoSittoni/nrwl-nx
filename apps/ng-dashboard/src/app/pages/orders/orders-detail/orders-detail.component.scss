@@ -1,0 +1,18 @@
+@import '../../../../../../../styles/styles.scss';
+
+mat-expansion-panel {
+    margin: 15px 0px;
+}
+
+.order-customer {
+    width: 100%;
+    display: inline-flex;
+}
+
+.address {
+    width: 50%;
+}
+
+.customer {
+    width: 50%;
+}

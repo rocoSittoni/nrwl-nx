@@ -15,7 +15,7 @@ export class CategoriesFormComponent implements OnInit {
   editMode: boolean = false;
   currentCategoryId: string = '';
   pickColors: string[] = [
-    'red', 'blue', 'green', 'yellow', 'orange', 'purple', 'turquoise', 'violet', 'pink', 'brown', 'grey'
+    '#f08080', '#a0c4ff', '#caffbf', '#fdffb6', '#ffd6a5', '#bdb2ff', '#9bf6ff', '#b388eb', '#ffadad', '#d6d2d2'
   ];
   pickIcons: string[] = [
     'code','cloud','business','grade','lunch_dining','sports_esports','build','work','emoji_events','home','pets','directions_car','explore','school'

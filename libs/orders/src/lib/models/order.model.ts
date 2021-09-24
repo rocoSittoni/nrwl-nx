@@ -3,7 +3,7 @@ import { User } from '@nx-commerce/users';
 
 export class Order {
     id?: string;
-    orderItem?: OrderItem;
+    orderItems?: OrderItem[];
     shippingAdress1?: string;
     shippingAdress2?: string;
     city?: string;

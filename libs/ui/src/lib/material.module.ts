@@ -17,6 +17,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 const MaterialComponents = [
     MatToolbarModule,
@@ -34,7 +35,8 @@ const MaterialComponents = [
     MatAutocompleteModule,
     MatPaginatorModule,
     MatChipsModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatGridListModule
 ];
 
 @NgModule({

@@ -2,12 +2,89 @@
     <mat-card>
         <mat-card-title>Order Detail</mat-card-title>
         <mat-card-subtitle>Here you can see details of an order</mat-card-subtitle>
+        
         <mat-expansion-panel hideToggle>
             <mat-expansion-panel-header>
-                <mat-panel-title>Title</mat-panel-title>
+                <mat-panel-title>Order Details</mat-panel-title>
                 <mat-panel-description>Description</mat-panel-description>
             </mat-expansion-panel-header>
-            <p>this is the content of the panel</p>
+            <mat-grid-list cols="3" rowHeight="4:1">
+                <mat-grid-tile>
+                    <h5>Order Id</h5>
+                    <p>{{order.id}}</p>
+                </mat-grid-tile>
+                <mat-grid-tile>
+                    <h5>Order Date</h5>
+                    <p>{{order.dateOrdered | date}}</p>
+                </mat-grid-tile>
+                <mat-grid-tile>
+                    <h5>Order Status</h5>
+                    <p>{{order.status}}</p>
+                    <!-- <mat-select [(ngModel)]="selectedStatus" (valueChange)="onStatusChange($event)">
+                        <mat-option *ngFor="let status of statuses" [value]="status.label">
+                          {{status.label}}
+                        </mat-option>
+                      </mat-select> -->
+                </mat-grid-tile>
+                <mat-grid-tile>
+                    <h5>Order Total Price</h5>
+                    <p>{{order.totalPrice}}</p>
+                </mat-grid-tile>
+            </mat-grid-list>
         </mat-expansion-panel>
+
+        <mat-expansion-panel hideToggle>
+            <mat-expansion-panel-header>
+                <mat-panel-title>Order Items</mat-panel-title>
+                <mat-panel-description>Description</mat-panel-description>
+            </mat-expansion-panel-header>
+            <mat-grid-list cols="6" rowHeight="4:1">
+                <mat-grid-tile>Name</mat-grid-tile>
+                <mat-grid-tile>Brand</mat-grid-tile>
+                <mat-grid-tile>Category</mat-grid-tile>
+                <mat-grid-tile>Price</mat-grid-tile>
+                <mat-grid-tile>Quantity</mat-grid-tile>
+                <mat-grid-tile>Subtotal</mat-grid-tile>
+            </mat-grid-list>
+            <mat-grid-list *ngFor="let orderItem of order.orderItems" cols="6" rowHeight="4:1">
+                <mat-grid-tile>{{orderItem.product.name}}</mat-grid-tile>
+                <mat-grid-tile>{{orderItem.product.brand}}</mat-grid-tile>
+                <mat-grid-tile>{{orderItem.product.category.name}}</mat-grid-tile>
+                <mat-grid-tile>{{orderItem.product.price | currency}}</mat-grid-tile>
+                <mat-grid-tile>{{orderItem.quantity}}</mat-grid-tile>
+                <mat-grid-tile>{{orderItem.product.price * orderItem.quantity | currency}}</mat-grid-tile>
+            </mat-grid-list>
+            <mat-grid-list cols="6" rowHeight="4:1">
+                <mat-grid-tile></mat-grid-tile>
+                <mat-grid-tile></mat-grid-tile>
+                <mat-grid-tile></mat-grid-tile>
+                <mat-grid-tile></mat-grid-tile>
+                <mat-grid-tile>Total Price:</mat-grid-tile>
+                <mat-grid-tile>{{order.totalPrice | currency}}</mat-grid-tile>
+            </mat-grid-list>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel hideToggle>
+            <mat-expansion-panel-header>
+                <mat-panel-title>Order Customer</mat-panel-title>
+                <mat-panel-description>Description</mat-panel-description>
+            </mat-expansion-panel-header>
+            <div class="order-customer">
+                <div class="address">
+                    <div><h5>Order Address</h5></div>
+                    <div>{{order.shippingAdress1}}</div>
+                    <div>{{order.shippingAdress2}}</div>
+                    <div>{{order.zip}}{{order.city}}</div>
+                    <div>{{order.country}}</div>
+                </div>
+                <div class="customer">
+                    <div><h5>Customer Data</h5></div>
+                    <div>{{order.user.name}}</div>
+                    <div>{{order.user.email}}</div>
+                    <div>{{order.user.phone}}</div>
+                </div>
+            </div>
+        </mat-expansion-panel>
+
     </mat-card>
 </div>
