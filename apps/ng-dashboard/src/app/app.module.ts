@@ -6,6 +6,9 @@ import { MaterialModule } from '@nx-commerce/ui';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
+import { UsersModule } from '@nx-commerce/users';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { JwtInterceptor } from '@nx-commerce/users';
 
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
@@ -49,11 +52,13 @@ import { OrdersDetailComponent } from './pages/orders/orders-detail/orders-detai
         MaterialModule,
         FormsModule,
         ReactiveFormsModule,
+        UsersModule,
         QuillModule.forRoot()
     ],
     providers: [
         CategoriesService,
-        ProductsService
+        ProductsService,
+        { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
     ],
     bootstrap: [AppComponent]
 })

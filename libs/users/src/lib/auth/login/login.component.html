@@ -1,0 +1,29 @@
+<div class="container">
+    <div class="login-card">
+        <h1 class="header">Log In</h1>
+        <form [formGroup]="loginForm">
+            <div class="email-form">
+                <mat-form-field appearance="fill">
+                    <mat-label for="email">Email</mat-label>
+                    <input matInput placeholder="Enter your email" formControlName="email">
+                    <mat-error *ngIf="loginFormControls.email?.invalid && loginFormControls.email?.touched">Email is required</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="password-form">
+                <mat-form-field  appearance="fill">
+                    <mat-label>Password</mat-label>
+                    <input matInput type="password" placeholder="Enter your password" formControlName="password">
+                    <mat-error *ngIf="loginFormControls.password?.invalid && loginFormControls.password?.touched">Password is required</mat-error>
+                </mat-form-field>
+                <small *ngIf="isSubmited && authError">{{authMessage}}</small>
+                <br>
+                <mat-checkbox color="accent">Remember me</mat-checkbox>
+                <a href="/" class="forgot-password">forgot password?</a>
+            </div>
+            <button mat-raised-button class="login-button" color="primary" (click)="onSubmit()"><a>Log In</a></button>
+        </form>
+        <h4 class="or">or</h4>
+        <button mat-raised-button color="warn" class="log-with-google">log in with google<mat-icon class="google-icon" svgIcon="google-brands"></mat-icon></button>
+        <h4 class="create-account">New to NgCommerce? <a href="/">Create an account</a></h4>
+    </div>
+</div>

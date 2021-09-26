@@ -4,6 +4,9 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { ORDER_STATUS } from './status-constant';
+import { DialogService } from '@nx-commerce/ui';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-orders',
@@ -20,6 +23,9 @@ export class OrdersComponent implements OnInit {
   constructor(
     private ordersService: OrdersService,
     private router: Router,
+    private dialogService: DialogService,
+    private _snackBar: MatSnackBar,
+    private dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -37,7 +43,30 @@ export class OrdersComponent implements OnInit {
   }
 
   deleteOrder(orderId: string) {
-
+    this.dialogService.confirmDialog({
+      title: "Sure you want to delete this order?",
+      message: "This action can't be undone",
+      confirmText: "Sure",
+      cancelText: "No"
+    }).subscribe((sure) => {
+      if (sure) {
+        this.ordersService.deleteOrder(orderId).subscribe( () => {
+        this._getOrders();
+        this._snackBar.open('Order deleted', 'Close', {
+          horizontalPosition: 'center',
+          verticalPosition: 'top',
+          duration: 3000,
+          panelClass: 'success-snack'
+        });
+      }, () => {
+          this._snackBar.open('Failed to delete order', 'Close', {
+            horizontalPosition: 'center',
+            verticalPosition: 'top',
+            duration: 3000,
+            panelClass: 'failed-snack'
+          });
+      }); };
+    });
   }
 
   applyFilter(event: Event) {

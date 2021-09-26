@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
-import { Order, OrdersService } from '@nx-commerce/orders';
+import { Order, OrderItem, OrdersService } from '@nx-commerce/orders';
 import { ORDER_STATUS } from '../status-constant';
 
 @Component({
@@ -16,7 +17,8 @@ export class OrdersDetailComponent implements OnInit {
 
   constructor(
     private ordersService: OrdersService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private _snackBar: MatSnackBar,
     ) { }
 
   ngOnInit(): void {
@@ -25,7 +27,7 @@ export class OrdersDetailComponent implements OnInit {
   }
 
   private _mapStatuses() {
-    this.statuses = Object.keys(ORDER_STATUS).map(key => {
+    this.statuses = Object.keys(ORDER_STATUS).map((key) => {
       return {
         id: key,
         name: ORDER_STATUS[key].label
@@ -35,8 +37,20 @@ export class OrdersDetailComponent implements OnInit {
 
   onStatusChange(event) {
     this.ordersService.updateOrder({status: event.value}, this.order.id).subscribe(order => {
-      console.log(order);
-    })
+      this._snackBar.open('Status Updated', 'Close', {
+        horizontalPosition: 'center',
+        verticalPosition: 'top',
+        duration: 4000,
+        panelClass: 'success-snack'
+      });
+    }, () => {
+      this._snackBar.open('Failed to update status', 'Close', {
+        horizontalPosition: 'center',
+        verticalPosition: 'top',
+        duration: 3000,
+        panelClass: 'failed-snack'
+      });
+    });
   }
 
   private _getOrder() {
@@ -44,6 +58,7 @@ export class OrdersDetailComponent implements OnInit {
       if(params.id) {
         this.ordersService.getOrder(params.id).subscribe(order => {
           this.order = order;
+          this.selectedStatus = order.status;
         })
       }
     })

@@ -10,11 +10,13 @@ import { UsersComponent } from './pages/users/users.component';
 import { UsersFormComponent } from './pages/users/users-form/users-form.component';
 import { ShellComponent } from './shared/shell/shell.component';
 import { OrdersDetailComponent } from './pages/orders/orders-detail/orders-detail.component';
+import { AuthGuard } from '@nx-commerce/users';
 
 const routes: Routes = [
   {
     path: '',
     component: ShellComponent,
+    canActivate: [AuthGuard],
     children: [
       { path: 'dashboard', component: DashboardComponent },
 

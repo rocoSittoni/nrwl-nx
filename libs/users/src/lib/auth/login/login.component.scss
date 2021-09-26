@@ -1,0 +1,96 @@
+@import '../../../../../../styles/styles.scss';
+
+.container {
+    width: 100%;
+    height: 100%;
+    padding: 0px;
+    margin: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $surface-b;
+}
+
+.login-card {
+    width: 40%;
+    height: 70%;
+    top: 40%;
+    transform: translate(0, -30%);
+    text-align: center;
+    position: absolute;
+    border-radius: 5px;
+    background-color: white;
+    box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.75);
+    -webkit-box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.75);
+}
+
+.header {
+    margin-top: 3%;
+    font-weight: 500;
+}
+
+.email-form {
+    margin-top: 4%;
+}
+
+.login-button, .log-with-google {
+    width: 200px;
+    margin: 10px 0px;
+}
+
+.forgot-password {
+    margin-left: 8%;
+}
+
+.or {
+    margin: 0px;
+}
+
+mat-checkbox-label {
+    padding-bottom: 2px;
+}
+
+.google-icon {
+    width: 16px;
+    height: 16px;
+    margin-bottom: 18px;
+    margin-left: 6px;
+}
+
+.create-account {
+    margin-top: 1%;
+}
+
+@media (min-width: 765px) {
+    mat-form-field {
+        width: 50%;
+    }
+    .login-button, .log-with-google {
+        width: 50%;
+    }
+}
+
+@media (max-width: 480px) {
+    .login-card {
+        top: 40%;
+        transform: translate(0, -28%);
+    }
+    .forgot-password {
+        font-size: 12px;
+        margin-left: 2%;
+    }
+    mat-checkbox {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 1025px) {
+    .header {
+        margin-top: 6%;
+    }
+    .login-card {
+        width: 80%;
+        height: 75%;
+    }
+}

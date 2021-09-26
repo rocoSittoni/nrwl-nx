@@ -18,6 +18,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 const MaterialComponents = [
     MatToolbarModule,
@@ -36,7 +37,8 @@ const MaterialComponents = [
     MatPaginatorModule,
     MatChipsModule,
     MatExpansionModule,
-    MatGridListModule
+    MatGridListModule,
+    MatCheckboxModule
 ];
 
 @NgModule({
