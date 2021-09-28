@@ -1,16 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { CategoriesService, Category } from '@nx-commerce/products';
 import { Location } from '@angular/common';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-categories-form',
   templateUrl: './categories-form.component.html',
   styleUrls: ['./categories-form.component.scss']
 })
-export class CategoriesFormComponent implements OnInit {
+export class CategoriesFormComponent implements OnInit, OnDestroy {
 
   editMode: boolean = false;
   currentCategoryId: string = '';
@@ -20,6 +22,7 @@ export class CategoriesFormComponent implements OnInit {
   pickIcons: string[] = [
     'code','cloud','business','grade','lunch_dining','sports_esports','build','work','emoji_events','home','pets','directions_car','explore','school'
   ];
+  endSub$: Subject<any> = new Subject();
   
   constructor(
     private fb: FormBuilder,
@@ -40,11 +43,13 @@ export class CategoriesFormComponent implements OnInit {
   });
 
   private _addCategory(category: Category) {
-    this.categoriesService.createCategory(category).subscribe((category: Category) => {
+    this.categoriesService.createCategory(category)
+    .pipe(takeUntil(this.endSub$))
+    .subscribe((category: Category) => {
       this._snackBar.open(`Category ${category.name} created!`, 'Close', {
         horizontalPosition: 'center',
         verticalPosition: 'top',
-        duration: 3000,
+        duration: 4000,
         panelClass: 'success-snack'
       });
         this.location.back()
@@ -60,11 +65,13 @@ export class CategoriesFormComponent implements OnInit {
   }
 
   private _updateCategory(category: Category) {
-    this.categoriesService.updateCategory(category).subscribe((category: Category) => {
+    this.categoriesService.updateCategory(category)
+    .pipe(takeUntil(this.endSub$))
+    .subscribe((category: Category) => {
       this._snackBar.open(`Category ${category.name} updated!`, 'Close', {
         horizontalPosition: 'center',
         verticalPosition: 'top',
-        duration: 3000,
+        duration: 4000,
         panelClass: 'success-snack'
       });
         this.location.back()
@@ -73,7 +80,7 @@ export class CategoriesFormComponent implements OnInit {
       this._snackBar.open('Failed to update category', 'Close', {
         horizontalPosition: 'center',
         verticalPosition: 'top',
-        duration: 3000,
+        duration: 4000,
         panelClass: 'failed-snack'
       });
     });
@@ -84,11 +91,15 @@ export class CategoriesFormComponent implements OnInit {
   }
 
   private _checkEditMode() {
-    this.activatedRoute.params.subscribe(params => {
+    this.activatedRoute.params
+    .pipe(takeUntil(this.endSub$))
+    .subscribe(params => {
       if(params.id) {
         this.editMode = true;
         this.currentCategoryId = params.id;
-        this.categoriesService.getCategory(params.id).subscribe(category => {
+        this.categoriesService.getCategory(params.id)
+        .pipe(takeUntil(this.endSub$))
+        .subscribe(category => {
           this._categoryForm.name.setValue(category.name);
           this._categoryForm.icon.setValue(category.icon);
           this._categoryForm.color.setValue(category.color);
@@ -116,6 +127,10 @@ export class CategoriesFormComponent implements OnInit {
 
   cancel() {
     this.location.back();
+  }
+
+  ngOnDestroy() {
+    this.endSub$.complete();
   }
 
 }

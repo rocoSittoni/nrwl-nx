@@ -14,11 +14,10 @@ import { AuthGuard } from '@nx-commerce/users';
 
 const routes: Routes = [
   {
-    path: '',
-    component: ShellComponent,
+    path: '', component: ShellComponent,
     canActivate: [AuthGuard],
     children: [
-      { path: 'dashboard', component: DashboardComponent },
+      { path: '', component: DashboardComponent },
 
       { path: 'products', component: ProductsComponent },
       { path: 'products/form', component: ProductsFormComponent },
@@ -34,6 +33,8 @@ const routes: Routes = [
 
       { path: 'orders', component: OrdersComponent },
       { path: 'orders/:id', component: OrdersDetailComponent },
+
+      // { path: '**', redirectTo: '', pathMatch: 'full' }
     ]
   },
 ];

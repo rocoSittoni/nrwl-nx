@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
 import { Order, OrderItem, OrdersService } from '@nx-commerce/orders';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { ORDER_STATUS } from '../status-constant';
 
 @Component({
@@ -9,11 +11,12 @@ import { ORDER_STATUS } from '../status-constant';
   templateUrl: './orders-detail.component.html',
   styleUrls: ['./orders-detail.component.scss']
 })
-export class OrdersDetailComponent implements OnInit {
+export class OrdersDetailComponent implements OnInit, OnDestroy {
 
   order: Order;
   statuses = [];
   selectedStatus: any;
+  endSub$: Subject<any> = new Subject();
 
   constructor(
     private ordersService: OrdersService,
@@ -36,7 +39,9 @@ export class OrdersDetailComponent implements OnInit {
   }
 
   onStatusChange(event) {
-    this.ordersService.updateOrder({status: event.value}, this.order.id).subscribe(order => {
+    this.ordersService.updateOrder({status: event.value}, this.order.id)
+    .pipe(takeUntil(this.endSub$))
+    .subscribe(order => {
       this._snackBar.open('Status Updated', 'Close', {
         horizontalPosition: 'center',
         verticalPosition: 'top',
@@ -47,21 +52,26 @@ export class OrdersDetailComponent implements OnInit {
       this._snackBar.open('Failed to update status', 'Close', {
         horizontalPosition: 'center',
         verticalPosition: 'top',
-        duration: 3000,
+        duration: 4000,
         panelClass: 'failed-snack'
       });
     });
   }
 
   private _getOrder() {
-    this.activatedRoute.params.subscribe(params => {
+    this.activatedRoute.params.pipe(takeUntil(this.endSub$)).subscribe(params => {
       if(params.id) {
-        this.ordersService.getOrder(params.id).subscribe(order => {
+        this.ordersService.getOrder(params.id).pipe(takeUntil(this.endSub$))
+        .subscribe(order => {
           this.order = order;
           this.selectedStatus = order.status;
         })
       }
     })
+  }
+
+  ngOnDestroy() {
+    this.endSub$.complete();
   }
 
 }

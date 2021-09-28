@@ -1,20 +1,44 @@
-<div class="dashboard-wrapper">
+<div class="dashboard-wrapper" *ngIf="statistics.length">
     <mat-card>
         <mat-card-title>Dashboard</mat-card-title>
         <mat-card-subtitle>Latest Updates</mat-card-subtitle>
-        <div class="cards-wrapper">
-            <mat-card class="orders">
-               <div>
-                   <mat-icon>edit</mat-icon>
-               </div>
-               <div>
-                   <h3>orders</h3>
-                   <h1>1254</h1>
-               </div>
+        <div class="cards-container">
+            <mat-card class="card orders">
+                <div class="icon-div">
+                    <mat-icon>shopping_cart</mat-icon>
+                </div>
+                <div class="content">
+                    <h3>Orders</h3>
+                    <h1>{{statistics[0].ordersCount}}</h1>
+                </div>
             </mat-card>
-            <mat-card></mat-card>
-            <mat-card></mat-card>
-            <mat-card></mat-card>
+            <mat-card class="card customers">
+                <div class="icon-div">
+                    <mat-icon>people_alt</mat-icon>
+                </div>
+                <div class="content">
+                    <h3>Customers</h3>
+                    <h1>{{statistics[1].userCount}}</h1>
+                </div>
+            </mat-card>
+            <mat-card class="card products">
+                <div class="icon-div">
+                    <mat-icon>shopping_bag</mat-icon>
+                </div>
+                <div class="content">
+                    <h3>Products</h3>
+                    <h1>{{statistics[2].productCount}}</h1>
+                </div>
+            </mat-card>
+            <mat-card class="card sales">
+                <div class="icon-div">
+                    <mat-icon>paid</mat-icon>
+                </div>
+                <div class="content">
+                    <h3>total sales</h3>
+                    <h1>${{statistics[3].totalSales}}</h1>
+                </div>
+            </mat-card>
         </div>
     </mat-card>
 </div>

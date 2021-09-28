@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { UsersService } from '@nx-commerce/users';
 import { User } from '@nx-commerce/users';
@@ -7,17 +7,20 @@ import { DialogService } from '@nx-commerce/ui';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.scss']
 })
-export class UsersComponent implements OnInit {
+export class UsersComponent implements OnInit, OnDestroy {
 
   users: User[] = [];
   displayedColumns: String[] = ['name', 'email', 'isAdmin', 'country', 'actions'];
   dataSource = new MatTableDataSource<User>(this.users);
+  endSub$: Subject<any> = new Subject();
 
   constructor(
     private usersService: UsersService,
@@ -31,7 +34,9 @@ export class UsersComponent implements OnInit {
   }
 
   private _getUsers() {
-    this.usersService.getUsers().subscribe((users) => {
+    this.usersService.getUsers()
+    .pipe(takeUntil(this.endSub$))
+    .subscribe((users) => {
       this.users = users;
     });
   }
@@ -46,21 +51,24 @@ export class UsersComponent implements OnInit {
       message: "This action can't be undone",
       confirmText: "Sure",
       cancelText: "No"
-    }).subscribe((sure) => {
+    }).pipe(takeUntil(this.endSub$))
+    .subscribe((sure) => {
       if (sure) {
-        this.usersService.deleteUser(userId).subscribe( () => {
+        this.usersService.deleteUser(userId)
+        .pipe(takeUntil(this.endSub$))
+        .subscribe( () => {
         this._getUsers();
         this._snackBar.open('User deleted', 'Close', {
           horizontalPosition: 'center',
           verticalPosition: 'top',
-          duration: 3000,
+          duration: 4000,
           panelClass: 'success-snack'
         });
       }, () => {
           this._snackBar.open('Failed to delete user', 'Close', {
             horizontalPosition: 'center',
             verticalPosition: 'top',
-            duration: 3000,
+            duration: 4000,
             panelClass: 'failed-snack'
           });
       }); };
@@ -76,6 +84,10 @@ export class UsersComponent implements OnInit {
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
+  }
+
+  ngOnDestroy() {
+    this.endSub$.complete();
   }
 
 }

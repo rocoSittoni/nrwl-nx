@@ -1,23 +1,26 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Location } from '@angular/common';
 import { CategoriesService, Category, Product, ProductsService } from '@nx-commerce/products';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-products-form',
   templateUrl: './products-form.component.html',
   styleUrls: ['./products-form.component.scss']
 })
-export class ProductsFormComponent implements OnInit {
+export class ProductsFormComponent implements OnInit, OnDestroy {
   
   editMode: boolean = false;
   isSubmited: boolean = false;
   categories: Category[] = [];
   displayImage: string | ArrayBuffer = '';
   currentProductId: string = '';
-  productForm: FormGroup
+  productForm: FormGroup;
+  endSub$: Subject<any> = new Subject();
 
   constructor(
     private fb: FormBuilder,
@@ -69,11 +72,13 @@ export class ProductsFormComponent implements OnInit {
   }
 
   private _addProduct(productData: FormData) {
-    this.productsService.createProduct(productData).subscribe((product: Product) => {
+    this.productsService.createProduct(productData)
+    .pipe(takeUntil(this.endSub$))
+    .subscribe((product: Product) => {
       this._snackBar.open(`Product created!`, 'Close', {
         horizontalPosition: 'center',
         verticalPosition: 'top',
-        duration: 3000,
+        duration: 4000,
         panelClass: 'success-snack'
       });
         this.location.back()
@@ -89,11 +94,13 @@ export class ProductsFormComponent implements OnInit {
   }
 
   private _updateProduct(productFormData: FormData) {
-    this.productsService.updateProduct(productFormData, this.currentProductId).subscribe(() => {
+    this.productsService.updateProduct(productFormData, this.currentProductId)
+    .pipe(takeUntil(this.endSub$))
+    .subscribe(() => {
       this._snackBar.open(`Product updated!`, 'Close', {
         horizontalPosition: 'center',
         verticalPosition: 'top',
-        duration: 3000,
+        duration: 4000,
         panelClass: 'success-snack'
       });
         this.location.back()
@@ -102,7 +109,7 @@ export class ProductsFormComponent implements OnInit {
       this._snackBar.open('Failed to update category', 'Close', {
         horizontalPosition: 'center',
         verticalPosition: 'top',
-        duration: 3000,
+        duration: 4000,
         panelClass: 'failed-snack'
       });
     });
@@ -126,17 +133,23 @@ export class ProductsFormComponent implements OnInit {
   }
 
   private _getCategories() {
-    this.categoriesService.getCategories().subscribe((categories) => {
+    this.categoriesService.getCategories()
+    .pipe(takeUntil(this.endSub$))
+    .subscribe((categories) => {
       this.categories = categories;
     });
   }
 
   private _checkEditMode() {
-    this.activatedRoute.params.subscribe(params => {
+    this.activatedRoute.params
+    .pipe(takeUntil(this.endSub$))
+    .subscribe(params => {
       if(params.id) {
         this.editMode = true;
         this.currentProductId = params.id;
-        this.productsService.getProduct(params.id).subscribe(product => {
+        this.productsService.getProduct(params.id)
+        .pipe(takeUntil(this.endSub$))
+        .subscribe(product => {
           this._productForm.name.setValue(product.name);
           this._productForm.brand.setValue(product.brand);
           this._productForm.price.setValue(product.price);
@@ -153,13 +166,6 @@ export class ProductsFormComponent implements OnInit {
     });
   }
 
-  numbersOnly(event) {
-    const input = String.fromCharCode(event.keyCode);
-    if (!/^[0-9]*$/.test(input)) {
-        event.preventDefault();
-    }
-}
-
   public QuillConfiguration = {
     toolbar: [
       ['bold', 'italic', 'underline', 'strike'],
@@ -170,6 +176,10 @@ export class ProductsFormComponent implements OnInit {
       ['link'],
       ['clean'],
     ],
+  }
+
+  ngOnDestroy() {
+    this.endSub$.complete();
   }
 
 }

@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '@env/environment';
 import { Product } from '@nx-commerce/products';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -33,6 +34,10 @@ export class ProductsService {
 
   deleteProduct(productId: string):Observable<Product> {
     return this.http.delete<Product>(`${this.productsApiUrl}/${productId}`);
-  } 
+  }
+
+  getProductsCount(): Observable<{productCount: number}> {
+    return this.http.get<{productCount: number}>(`${this.productsApiUrl}/get/count`);
+  }
 
 }

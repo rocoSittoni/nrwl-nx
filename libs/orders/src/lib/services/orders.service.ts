@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Order } from '../models/order.model';
 import { environment } from '@env/environment';
+import { map } from 'rxjs/operators';  
 
 @Injectable({
   providedIn: 'root'
@@ -33,6 +34,14 @@ export class OrdersService {
 
   deleteOrder(orderId: string):Observable<Order> {
     return this.http.delete<Order>(`${this.ordersApiUrl}/${orderId}`);
-  } 
+  }
+
+  getOrdersCount(): Observable<{ordersCount: number}> {
+    return this.http.get<{ordersCount: number}>(`${this.ordersApiUrl}/get/count`);
+  }
+
+  getTotalSales(): Observable<{totalSales: number}> {
+    return this.http.get<{totalSales: number}>(`${this.ordersApiUrl}/get/totalsales`);
+  }
 
 }

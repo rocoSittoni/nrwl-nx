@@ -1,19 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Location } from '@angular/common';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
 import { User, UsersService } from '@nx-commerce/users';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-users-form',
   templateUrl: './users-form.component.html',
   styleUrls: ['./users-form.component.scss']
 })
-export class UsersFormComponent implements OnInit {
+export class UsersFormComponent implements OnInit, OnDestroy {
 
   editMode: boolean = false;
   currentUserId: string = '';
+  endSub$: Subject<any> = new Subject();
   
   constructor(
     private fb: FormBuilder,
@@ -41,11 +44,13 @@ export class UsersFormComponent implements OnInit {
   });
 
   private _addUser(user: User) {
-    this.usersService.createUser(user).subscribe((user: User) => {
+    this.usersService.createUser(user)
+    .pipe(takeUntil(this.endSub$))
+    .subscribe((user: User) => {
       this._snackBar.open(`User ${user.name} created!`, 'Close', {
         horizontalPosition: 'center',
         verticalPosition: 'top',
-        duration: 3000,
+        duration: 4000,
         panelClass: 'success-snack'
       });
         this.location.back()
@@ -61,11 +66,13 @@ export class UsersFormComponent implements OnInit {
   }
 
   private _updateUser(user: User) {
-    this.usersService.updateUser(user).subscribe((user: User) => {
+    this.usersService.updateUser(user)
+    .pipe(takeUntil(this.endSub$))
+    .subscribe((user: User) => {
       this._snackBar.open(`User ${user.name} updated!`, 'Close', {
         horizontalPosition: 'center',
         verticalPosition: 'top',
-        duration: 3000,
+        duration: 4000,
         panelClass: 'success-snack'
       });
         this.location.back()
@@ -74,7 +81,7 @@ export class UsersFormComponent implements OnInit {
       this._snackBar.open('Failed to update user', 'Close', {
         horizontalPosition: 'center',
         verticalPosition: 'top',
-        duration: 3000,
+        duration: 4000,
         panelClass: 'failed-snack'
       });
     });
@@ -85,11 +92,15 @@ export class UsersFormComponent implements OnInit {
   }
 
   private _checkEditMode() {
-    this.activatedRoute.params.subscribe(params => {
+    this.activatedRoute.params
+    .pipe(takeUntil(this.endSub$))
+    .subscribe(params => {
       if(params.id) {
         this.editMode = true;
         this.currentUserId = params.id;
-        this.usersService.getUser(params.id).subscribe(user => {
+        this.usersService.getUser(params.id)
+        .pipe(takeUntil(this.endSub$))
+        .subscribe(user => {
           this._userForm.name.setValue(user.name);
           this._userForm.email.setValue(user.email);
           this._userForm.phone.setValue(user.phone);
@@ -132,6 +143,10 @@ export class UsersFormComponent implements OnInit {
 
   cancel() {
     this.location.back();
+  }
+
+  ngOnDestroy() {
+    this.endSub$.complete();
   }
 
 }

@@ -1,10 +1,12 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Product, ProductsService } from '@nx-commerce/products';
 import { Router } from '@angular/router';
 import { DialogService } from '@nx-commerce/ui';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-products',
@@ -13,12 +15,13 @@ import { MatTableDataSource } from '@angular/material/table';
 })
 
 
-export class ProductsComponent implements OnInit, AfterViewInit {
+export class ProductsComponent implements OnInit, AfterViewInit, OnDestroy {
   
   products: Product[] = [];
   displayedColumns: String[] = [
     'image', 'name', 'price', 'countInStock', 'category', 'dateCreated', 'actions'
   ];
+  endSub$: Subject<any> = new Subject();
 
   dataSource = new MatTableDataSource<Product>(this.products);
   
@@ -34,7 +37,9 @@ export class ProductsComponent implements OnInit, AfterViewInit {
   }
 
   private _getProducts() {
-    this.productsService.getProducts().subscribe((products) => {
+    this.productsService.getProducts()
+    .pipe(takeUntil(this.endSub$))
+    .subscribe((products) => {
       this.products = products;
     });
   }
@@ -49,21 +54,25 @@ export class ProductsComponent implements OnInit, AfterViewInit {
       message: "This action can't be undone",
       confirmText: "Sure",
       cancelText: "No"
-    }).subscribe((sure) => {
+    })
+    .pipe(takeUntil(this.endSub$))
+    .subscribe((sure) => {
       if (sure) {
-        this.productsService.deleteProduct(productId).subscribe(() => {
+        this.productsService.deleteProduct(productId)
+        .pipe(takeUntil(this.endSub$))
+        .subscribe(() => {
         this._getProducts();
         this._snackbar.open('Product deleted', 'Close', {
           horizontalPosition: 'center',
           verticalPosition: 'top',
-          duration: 3000,
+          duration: 4000,
           panelClass: 'success-snack'
         });
       }, () => {
           this._snackbar.open('Failed to delete product', 'Close', {
             horizontalPosition: 'center',
             verticalPosition: 'top',
-            duration: 3000,
+            duration: 4000,
             panelClass: 'failed-snack'
           });
       }); };
@@ -79,6 +88,10 @@ export class ProductsComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
+  }
+
+  ngOnDestroy() {
+    this.endSub$.complete();
   }
 
 }

@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '@env/environment';
 import { User } from '@nx-commerce/users';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -32,5 +33,9 @@ export class UsersService {
   deleteUser(userId: string):Observable<User> {
     return this.http.delete<User>(`${this.usersApiUrl}/${userId}`);
   } 
+
+  getUsersCount(): Observable<{userCount: number}> {
+    return this.http.get<{userCount: number}>(`${this.usersApiUrl}/get/count`);
+  }
 
 }

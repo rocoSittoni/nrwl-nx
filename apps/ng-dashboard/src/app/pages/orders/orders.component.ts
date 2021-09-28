@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Order, OrdersService } from '@nx-commerce/orders';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
@@ -7,18 +7,21 @@ import { ORDER_STATUS } from './status-constant';
 import { DialogService } from '@nx-commerce/ui';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-orders',
   templateUrl: './orders.component.html',
   styleUrls: ['./orders.component.scss']
 })
-export class OrdersComponent implements OnInit {
+export class OrdersComponent implements OnInit, OnDestroy {
 
   orders: Order[] = []
   displayedColumns: String[] = ['user', 'totalPrice', 'dateOrdered', 'status', 'actions'];
   dataSource = new MatTableDataSource<Order>(this.orders);
   orderStatus = ORDER_STATUS;
+  endSub$: Subject<any> = new Subject();
 
   constructor(
     private ordersService: OrdersService,
@@ -33,7 +36,9 @@ export class OrdersComponent implements OnInit {
   }
 
   private _getOrders() {
-    this.ordersService.getOrders().subscribe((orders) => {
+    this.ordersService.getOrders()
+    .pipe(takeUntil(this.endSub$))
+    .subscribe((orders) => {
       this.orders = orders;
     })
   }
@@ -48,21 +53,25 @@ export class OrdersComponent implements OnInit {
       message: "This action can't be undone",
       confirmText: "Sure",
       cancelText: "No"
-    }).subscribe((sure) => {
+    })
+    .pipe(takeUntil(this.endSub$))
+    .subscribe((sure) => {
       if (sure) {
-        this.ordersService.deleteOrder(orderId).subscribe( () => {
+        this.ordersService.deleteOrder(orderId)
+        .pipe(takeUntil(this.endSub$))
+        .subscribe( () => {
         this._getOrders();
         this._snackBar.open('Order deleted', 'Close', {
           horizontalPosition: 'center',
           verticalPosition: 'top',
-          duration: 3000,
+          duration: 4000,
           panelClass: 'success-snack'
         });
       }, () => {
           this._snackBar.open('Failed to delete order', 'Close', {
             horizontalPosition: 'center',
             verticalPosition: 'top',
-            duration: 3000,
+            duration: 4000,
             panelClass: 'failed-snack'
           });
       }); };
@@ -78,6 +87,10 @@ export class OrdersComponent implements OnInit {
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
+  }
+
+  ngOnDestroy() {
+    this.endSub$.complete();
   }
 
 }
