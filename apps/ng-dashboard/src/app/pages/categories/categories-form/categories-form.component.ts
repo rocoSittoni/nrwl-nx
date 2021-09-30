@@ -17,10 +17,13 @@ export class CategoriesFormComponent implements OnInit, OnDestroy {
   editMode: boolean = false;
   currentCategoryId: string = '';
   pickColors: string[] = [
-    '#f08080', '#a0c4ff', '#caffbf', '#fdffb6', '#ffd6a5', '#bdb2ff', '#9bf6ff', '#b388eb', '#ffadad', '#d6d2d2'
+    'hsl(355, 78%, 56%)', 'hsl(323, 78%, 56%)', 'hsl(293, 78%, 56%)', 'hsl(268, 78%, 56%)',
+    'hsl(246, 78%, 56%)', 'hsl(216, 78%, 56%)', 'hsl(182, 78%, 56%)', 'hsl(157, 78%, 56%)',
+    'hsl(120, 78%, 56%)', 'hsl(69, 78%, 56%)', 'hsl(34, 78%, 56%)'
   ];
   pickIcons: string[] = [
-    'code','cloud','business','grade','lunch_dining','sports_esports','build','work','emoji_events','home','pets','directions_car','explore','school'
+    'home','build','work','pets','explore','book','create','school','emoji_events',
+    'sports_esports','science','tune','smartphone','computer','watch','headset'
   ];
   endSub$: Subject<any> = new Subject();
   
