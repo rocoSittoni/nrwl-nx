@@ -1,3 +1,42 @@
 <mat-toolbar color="primary">
-    <h1>navbar works</h1>
+    <div>
+        <span class="logo" routerLink="/">Nrwl-Nx</span>
+    </div>
+    <div class="search-div">
+        <mat-form-field appearance="legacy">
+            <input matInput class="search-input"
+            type="text"
+            name="search"
+            placeholder="Search">
+            <button mat-mini-fab color="primary" aria-label="Example icon button with a menu icon">
+                <mat-icon>search</mat-icon>
+              </button>
+        </mat-form-field>
+    </div>
+    <div class="right-items">
+        <div class="icons">
+            <span class="span-icon">
+                <mat-icon aria-label="account_circle" [matMenuTriggerFor]="account">account_circle</mat-icon>
+                <mat-menu #account="matMenu">
+                    <h3>Hello there!</h3>
+                    <button mat-menu-item routerLink="login">Log In</button>
+                    <button mat-menu-item routerLink="signup">Sign Up</button>
+                </mat-menu>
+            </span>
+            <span class="span-icon">
+                <mat-icon aria-label="favorites">notifications</mat-icon>
+            </span>
+            <span class="span-icon">
+                <mat-icon aria-label="favorites" routerLink="favorites">favorite</mat-icon>
+            </span>
+            <span class="span-icon">
+                <mat-icon aria-label="cart" matBadge="3" matBadgeColor="warn" matBadgeSize="small" routerLink="cart">shopping_cart</mat-icon>
+            </span> 
+        </div>
+        <div class="button-container">
+            <button mat-mini-fab color="primary" aria-label="icon button with a menu icon">
+              <mat-icon>menu</mat-icon>
+            </button>
+        </div>
+    </div>
 </mat-toolbar>

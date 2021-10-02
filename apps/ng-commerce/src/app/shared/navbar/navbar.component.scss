@@ -1,0 +1,82 @@
+mat-toolbar {
+    width: 100%;
+    position: sticky;
+    position: -webkit-sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.75);
+    -webkit-box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.75);
+    justify-content: space-around;
+}
+
+.logo {
+    font-weight: 700;
+    cursor: pointer;
+}
+
+mat-form-field {
+    max-width: 22rem;
+    font-size: 1rem;
+    margin-left: 0.3rem;
+}
+
+::ng-deep {
+    mat-form-field.mat-form-field-appearance-legacy .mat-form-field-infix {
+        padding: 0;
+    }
+}
+
+.right-items {
+    display: inline-flex;
+}
+
+.icons {
+    margin-bottom: 0.6rem;
+}
+
+.span-icon {
+    position: relative;
+    top: 0.6rem;
+    padding-left: .5rem;
+}
+
+mat-icon {
+    transition: .3s;
+    cursor: pointer;
+    &:hover {
+        transform: scale(1.1);
+        -webkit-transform: scale(1.1);
+        -moz-transform: scale(1.1);
+    }
+}
+
+.button-container {
+    margin-left: 2rem;
+    margin-bottom: 0.4rem;
+    display: none;
+}
+
+@media (max-width: 620px) {
+    .icons {
+        display: none;
+    }
+    .button-container {
+        display: flex;
+    }
+    mat-toolbar {
+        justify-content: space-between;
+    }
+}
+
+@media (max-width: 450px) {
+    ::ng-deep {
+        mat-form-field.mat-form-field-appearance-legacy .mat-form-field-infix {
+            width: 6.5rem;
+        }
+    }
+    .search-div {
+        position: relative;
+        right: 3%;
+    }
+}

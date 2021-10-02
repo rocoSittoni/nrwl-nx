@@ -19,6 +19,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatMenuModule } from '@angular/material/menu';
 
 const MaterialComponents = [
     MatToolbarModule,
@@ -38,7 +39,8 @@ const MaterialComponents = [
     MatChipsModule,
     MatExpansionModule,
     MatGridListModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatMenuModule
 ];
 
 @NgModule({
