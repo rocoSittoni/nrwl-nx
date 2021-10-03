@@ -20,6 +20,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
 
 const MaterialComponents = [
     MatToolbarModule,
@@ -40,7 +41,8 @@ const MaterialComponents = [
     MatExpansionModule,
     MatGridListModule,
     MatCheckboxModule,
-    MatMenuModule
+    MatMenuModule,
+    MatBottomSheetModule
 ];
 
 @NgModule({

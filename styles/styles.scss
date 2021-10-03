@@ -1,4 +1,8 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import "~swiper/scss";
+@import "~swiper/scss/navigation";
+@import "~swiper/scss/virtual";
+@import "~swiper/scss/free-mode";
 
 $primary: hsl(246, 78%, 56%);
 $accent: #f0457e;

@@ -1,0 +1,31 @@
+<div class="swiper-content">
+<swiper
+    #swiper
+    [config]="config"
+    (swiper)="onSwiper($event)"
+    (slideChange)="onSlideChange()">
+
+    <ng-container *ngFor="let slide of slides; index as i">
+        <ng-template swiperSlide>Slide {{ slide }}</ng-template>
+    </ng-container>
+
+    <button (click)="slideNext()">Next slide</button>
+    <button (click)="slidePrev()">Prev slide</button>
+    
+      <!-- <ng-container *ngFor="let product of products | sortBy: 'category' : 'tech'"></ng-container> -->
+      <!-- <ng-container *ngFor="">
+        <ng-template swiperSlide>
+          <mat-card>
+            <img mat-card-image src="../../../assets/5f15d8852a025143f9593a7c-1604665316400.jpeg" alt="product-image">
+              <mat-card-title>1234</mat-card-title>
+              <mat-card-subtitle>shipping</mat-card-subtitle>
+            <mat-card-content>
+              <p>
+                long product description blabla
+              </p>
+            </mat-card-content>
+          </mat-card>
+        </ng-template>
+      </ng-container> -->
+</swiper>
+</div>

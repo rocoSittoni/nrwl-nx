@@ -3,22 +3,38 @@
         <span class="logo" routerLink="/">Nrwl-Nx</span>
     </div>
     <div class="search-div">
-        <mat-form-field appearance="legacy">
+        <form class="search-form">
+            <input class="search-input"
+            type="text"
+            name="search"
+            placeholder="Search">
+            <!-- <button class="search-button">
+                Search
+            </button> -->
+            <button class="search-button"
+                    mat-raised-button color="primary"
+                    aria-label="Example icon button with a menu icon">
+                    <mat-icon>search</mat-icon>
+            </button>
+        </form>
+        <!-- <mat-form-field appearance="legacy">
             <input matInput class="search-input"
             type="text"
             name="search"
             placeholder="Search">
-            <button mat-mini-fab color="primary" aria-label="Example icon button with a menu icon">
-                <mat-icon>search</mat-icon>
-              </button>
-        </mat-form-field>
+            <button class="search-button"
+                    mat-mini-fab color="accent"
+                    aria-label="Example icon button with a menu icon">
+                    <mat-icon>search</mat-icon>
+            </button>
+        </mat-form-field> -->
     </div>
     <div class="right-items">
         <div class="icons">
             <span class="span-icon">
-                <mat-icon aria-label="account_circle" [matMenuTriggerFor]="account">account_circle</mat-icon>
-                <mat-menu #account="matMenu">
-                    <h3>Hello there!</h3>
+                <mat-icon aria-label="account_circle" [matMenuTriggerFor]="account">person</mat-icon>
+                <mat-menu #account="matMenu" xPosition="before" class="account-menu">
+                    <h3 class="account-menu-title">Hello there!</h3>
                     <button mat-menu-item routerLink="login">Log In</button>
                     <button mat-menu-item routerLink="signup">Sign Up</button>
                 </mat-menu>
@@ -34,9 +50,29 @@
             </span> 
         </div>
         <div class="button-container">
-            <button mat-mini-fab color="primary" aria-label="icon button with a menu icon">
-              <mat-icon>menu</mat-icon>
+            <button mat-mini-fab color="primary"
+                    aria-label="icon button with a menu icon"
+                    [matMenuTriggerFor]="rightMenu">
+                <mat-icon>menu</mat-icon>
             </button>
+            <mat-menu #rightMenu="matMenu" xPosition="before" class="right-menu">
+                <button mat-menu-item>
+                    <mat-icon>shopping_cart</mat-icon>
+                    <span>Cart</span>
+                </button>
+                <button mat-menu-item>
+                    <mat-icon>favorite</mat-icon>
+                    <span>Favorites</span>
+                </button>
+                <button mat-menu-item>
+                    <mat-icon>person</mat-icon>
+                    <span>Account</span>
+                </button>
+                <button mat-menu-item>
+                    <mat-icon>notifications</mat-icon>
+                    <span>notifications</span>
+                </button>
+            </mat-menu>
         </div>
     </div>
 </mat-toolbar>

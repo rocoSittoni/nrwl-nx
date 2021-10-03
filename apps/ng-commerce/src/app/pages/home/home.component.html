@@ -1,1 +1,11 @@
-<p>home works!</p>
+<div class="first-section"></div>
+<ng-container *ngFor="let category of categories">
+    <div class="category-wrapper"> 
+        <div class="category-name">
+            <h1>Technology</h1>
+        </div>
+        <div class="carousel-wrapper">
+            <app-swiper-carousel></app-swiper-carousel>
+        </div>
+    </div> 
+</ng-container>
