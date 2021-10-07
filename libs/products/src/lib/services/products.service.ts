@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '@env/environment';
 import { Product } from '@nx-commerce/products';
-import { map } from 'rxjs/operators';
+// import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -38,6 +38,10 @@ export class ProductsService {
 
   getProductsCount(): Observable<{productCount: number}> {
     return this.http.get<{productCount: number}>(`${this.productsApiUrl}/get/count`);
+  }
+
+  getFeaturedProducts(count: number): Observable<Product[]> {
+    return this.http.get<Product[]>(`${this.productsApiUrl}/get/featured/${count}`);
   }
 
 }

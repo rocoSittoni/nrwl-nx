@@ -1,4 +1,5 @@
 <div class="first-section"></div>
+
 <div class="category-chips">
     <mat-chip-list aria-label="Categories list" *ngFor="let category of categories">
         <mat-chip [ngStyle]="{background: category.color}"
@@ -9,13 +10,16 @@
         </mat-chip>
     </mat-chip-list>
 </div>
-<ng-container>
-    <div class="category-wrapper"> 
-        <div class="category-name">
-            <h1>Technology</h1>
-        </div>
-        <div class="carousel-wrapper">
-            <app-swiper-carousel></app-swiper-carousel>
-        </div>
-    </div> 
-</ng-container>
+
+<div class="carousel-wrapper">
+    <app-featured></app-featured>
+</div>
+
+<div class="category-wrapper">
+    <div class="category-name">
+        <h1>Technology</h1>
+    </div>
+    <div class="carousel-wrapper">
+        <app-swiper-carousel></app-swiper-carousel>
+    </div>
+</div>

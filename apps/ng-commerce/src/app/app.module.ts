@@ -11,6 +11,8 @@ import { NavbarComponent } from './shared/navbar/navbar.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { SwiperCarouselComponent } from './components/swiper/swiper-carousel.component';
 import { HttpClientModule } from '@angular/common/http';
+import { FeaturedComponent } from './components/featured/featured.component';
+import { ProductItemComponent } from './components/product-item/product-item.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +21,8 @@ import { HttpClientModule } from '@angular/common/http';
     NavbarComponent,
     FooterComponent,
     SwiperCarouselComponent,
+    FeaturedComponent,
+    ProductItemComponent,
   ],
   imports: [
     BrowserModule,

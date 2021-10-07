@@ -12,9 +12,10 @@
 .category-chips {
     height: min-content;
     display: flex;
+    overflow-x: scroll;
+    // on phone set display block
     align-items: center;
-    padding: 0.6rem;
-    background-color: yellowgreen;
+    padding: 1rem;
 }
 
 mat-chip {
@@ -27,6 +28,10 @@ mat-chip {
     margin: 0px;
     padding: 0px;
     background-color: crimson;
+}
+
+.carousel-wrapper {
+    text-align: -webkit-center;
 }
 
 .category-name {

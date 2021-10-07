@@ -1,0 +1,33 @@
+.content {
+    overflow: hidden;
+    transition: transform 0.3s ease-in;
+    height: auto;
+    transform: translateY(5rem);
+    transform-origin: bottom;
+    font-size: 1rem;
+}
+
+mat-card {
+    width: 14rem;
+    height: 12rem;
+    cursor: pointer;
+    overflow: hidden;
+    border-radius: 5px;
+    &:hover {
+        height: 15rem;
+        .content {
+            transform: translateY(-0.5rem);
+        }
+    }
+}
+
+img {
+    max-height: 160px;
+    width: auto;
+    padding-top: 0.5rem;
+}
+
+// .price {
+//     position: relative;
+//     top: 1rem;
+// }

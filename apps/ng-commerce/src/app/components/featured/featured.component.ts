@@ -1,4 +1,7 @@
-import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ChangeDetectorRef, OnDestroy } from '@angular/core';
+import { Product, ProductsService } from '@nx-commerce/products';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import SwiperCore, { SwiperOptions, Navigation, Virtual } from "swiper";
 import { SwiperComponent } from 'swiper/angular';
 
@@ -8,19 +11,32 @@ SwiperCore.use([
 ]);
 
 @Component({
-  selector: 'app-swiper-carousel',
-  templateUrl: './swiper-carousel.component.html',
-  styleUrls: ['./swiper-carousel.component.scss']
+  selector: 'app-featured',
+  templateUrl: './featured.component.html',
+  styleUrls: ['./featured.component.scss']
 })
-export class SwiperCarouselComponent implements OnInit {
+export class FeaturedComponent implements OnInit, OnDestroy {
 
-  constructor(private cd: ChangeDetectorRef) { }
+  endSub$: Subject<any> = new Subject();
+  featuredProducts: Product[] = [];
+
+  constructor(
+    private cd: ChangeDetectorRef,
+    private productsService: ProductsService
+    ) { }
 
   ngOnInit(): void {
+    this._getFeaturedProducts();
+  }
+
+  private _getFeaturedProducts() {
+    this.productsService.getFeaturedProducts(12)
+    .pipe(takeUntil(this.endSub$)).subscribe(products => {
+      this.featuredProducts = products;
+    })
   }
 
   @ViewChild("swiper", { static: false }) swiper?: SwiperComponent;
-  
   slideNext() {
     this.swiper.swiperRef.slideNext(100);
   }
@@ -50,6 +66,10 @@ export class SwiperCarouselComponent implements OnInit {
     centeredSlides: true,
     breakpoints: this.breakpoints,
     loop: true,
+  }
+
+  ngOnDestroy() {
+    this.endSub$.complete();
   }
 
 }

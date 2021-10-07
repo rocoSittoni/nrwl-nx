@@ -1,36 +1,11 @@
 .swiper-content {
-    width: 100%;
+    width: 95%;
     height: 18rem;
     background-color: salmon;
+    margin: 0;
 }
 
 .swiper {
     height: 100%;
     padding: 0;
-}
-
-.content {
-    overflow: hidden;
-    transition: transform 0.3s ease-in;
-    height: auto;
-    transform: translateY(5rem);
-    transform-origin: bottom;
-    font-size: 1rem;
-}
-
-mat-card {
-    height: 12rem;
-    cursor: pointer;
-    overflow: hidden;
-    &:hover {
-        height: fit-content;
-        .content {
-            transform: translateY(0);
-        }
-    }
-}
-
-.price {
-    position: relative;
-    top: 1rem;
 }
