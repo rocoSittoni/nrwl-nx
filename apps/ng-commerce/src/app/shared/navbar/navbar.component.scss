@@ -15,21 +15,11 @@ mat-toolbar {
     cursor: pointer;
 }
 
-// .search-div {
-//     position: relative;
-//     right: 3%;
-//     top: 0.2rem;
-// }
-
-mat-form-field {
-    max-width: 22rem;
-    margin-left: 0.3rem;
-}
 .search-input {
     padding: 10px;
-    width: 300px;
-    border-top-left-radius: 5px;
-    border-bottom-left-radius: 5px;
+    width: 18rem;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
     outline: none;
     border: none;
 }
@@ -37,9 +27,6 @@ mat-form-field {
 .search-button {
     position: relative;
     top: 0;
-}
-
-.search-button {
     bottom: 2px;
 }
 
@@ -82,8 +69,7 @@ mat-icon {
 }
 
 .button-container {
-    margin-left: 0.5rem;
-    margin-bottom: 0.4rem;
+    margin-bottom: 0.3rem;
     display: none;
 }
 

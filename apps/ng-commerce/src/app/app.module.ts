@@ -10,6 +10,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { SwiperCarouselComponent } from './components/swiper/swiper-carousel.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { SwiperCarouselComponent } from './components/swiper/swiper-carousel.com
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
-    SwiperModule
+    SwiperModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -1,11 +1,10 @@
 import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
-import SwiperCore, { SwiperOptions, Navigation, Virtual, FreeMode } from "swiper";
+import SwiperCore, { SwiperOptions, Navigation, Virtual } from "swiper";
 import { SwiperComponent } from 'swiper/angular';
 
 SwiperCore.use([
   Navigation,
   Virtual,
-  // FreeMode
 ]);
 
 @Component({
@@ -21,13 +20,13 @@ export class SwiperCarouselComponent implements OnInit {
   }
 
   @ViewChild("swiper", { static: false }) swiper?: SwiperComponent;
-  slideNext(){
+  slideNext() {
     this.swiper.swiperRef.slideNext(100);
   }
-  slidePrev(){
+  slidePrev() {
     this.swiper.swiperRef.slidePrev(100);
   }
-  
+
   onSwiper(swiper: any) {
     console.log(swiper);
   }
@@ -39,24 +38,23 @@ export class SwiperCarouselComponent implements OnInit {
     300: { slidesPerView: 1, spaceBetween: 10 },
     640: { slidesPerView: 2, spaceBetween: 20 },
     768: { slidesPerView: 4, spaceBetween: 40 },
-    1024:{ slidesPerView: 4, spaceBetween: 40 },
+    1024: { slidesPerView: 4, spaceBetween: 40 },
   };
 
-  slides = Array.from({ length: 25 }).map(
-    (el, index) => `Slide ${index + 1}`
-  );
+  // slides = Array.from({ length: 25 }).map(
+  //   (el, index) => `Slide ${index + 1}`
+  // );
 
   config: SwiperOptions = {
-      slidesPerView: 3,
-      spaceBetween: 50,
-      navigation: true,
-      // freeMode: true,
-      virtual: true,
-      centeredSlides: true,
-      breakpoints: this.breakpoints,
-      loop: true,
+    slidesPerView: 3,
+    spaceBetween: 50,
+    navigation: true,
+    virtual: true,
+    centeredSlides: true,
+    breakpoints: this.breakpoints,
+    loop: true,
   }
 
-  
+
 
 }

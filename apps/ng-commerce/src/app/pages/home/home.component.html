@@ -1,5 +1,15 @@
 <div class="first-section"></div>
-<ng-container *ngFor="let category of categories">
+<div class="category-chips">
+    <mat-chip-list aria-label="Categories list" *ngFor="let category of categories">
+        <mat-chip [ngStyle]="{background: category.color}"
+                  selected
+                  routerLink=" '/products/category/' + category.id">
+            <mat-icon>{{this.category.icon}}</mat-icon>
+            {{this.category.name}}
+        </mat-chip>
+    </mat-chip-list>
+</div>
+<ng-container>
     <div class="category-wrapper"> 
         <div class="category-name">
             <h1>Technology</h1>

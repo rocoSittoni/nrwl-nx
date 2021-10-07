@@ -8,7 +8,7 @@ import { takeUntil } from 'rxjs/operators';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit, OnDestroy {
+export class HomeComponent implements OnInit {
 
   categories: Category[] = [];
   endSub$: Subject<any> = new Subject();
@@ -16,6 +16,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   constructor(private categoriesService: CategoriesService) { }
 
   ngOnInit(): void {
+    this._getCategories();
   }
 
   private _getCategories() {
@@ -23,6 +24,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     .pipe(takeUntil(this.endSub$))
     .subscribe((categories) => {
       this.categories = categories;
+      console.log(categories);
     });
   }
 
