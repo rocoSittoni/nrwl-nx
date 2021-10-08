@@ -1,3 +1,19 @@
 /* You can add global styles to this file, and also import other style files */
 @import '../../../styles/styles.scss';
 
+body::-webkit-scrollbar {
+    width: 1em;
+}
+
+body::-webkit-scrollbar-track {
+    background: #ffffff;
+    // border-radius: 100vh;
+    // margin-block: .5em;
+}
+
+body::-webkit-scrollbar-thumb {
+    // background: linear-gradient(rgb(95, 100, 128), rgba(255, 0, 0, 0.801));
+    background: #e637a3;
+    border-radius: 100vh;
+    border: .15em solid rgb(255, 255, 255);
+}

@@ -45,10 +45,10 @@ export class FeaturedComponent implements OnInit, OnDestroy {
   }
 
   onSwiper(swiper: any) {
-    console.log(swiper);
+    // console.log(swiper);
   }
   onSlideChange() {
-    console.log('slide change');
+    // console.log('slide change');
   }
 
   breakpoints = {

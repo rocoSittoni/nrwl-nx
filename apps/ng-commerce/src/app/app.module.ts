@@ -13,6 +13,7 @@ import { SwiperCarouselComponent } from './components/swiper/swiper-carousel.com
 import { HttpClientModule } from '@angular/common/http';
 import { FeaturedComponent } from './components/featured/featured.component';
 import { ProductItemComponent } from './components/product-item/product-item.component';
+import { ChipsComponent } from './components/chips/chips.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { ProductItemComponent } from './components/product-item/product-item.com
     SwiperCarouselComponent,
     FeaturedComponent,
     ProductItemComponent,
+    ChipsComponent,
   ],
   imports: [
     BrowserModule,

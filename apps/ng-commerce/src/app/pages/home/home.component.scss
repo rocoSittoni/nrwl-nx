@@ -1,24 +1,12 @@
 .first-section {
     height: 300px;
     padding: 0;
-    margin: 0;
+    margin: 0 0 15px 0;
     // background: url("../../../assets/playstation.jpg");
     background-color: turquoise;
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
-}
-
-.category-chips {
-    height: min-content;
-    display: flex;
-    overflow-x: scroll;
-    align-items: center;
-    padding: 0.8rem;
-}
-
-mat-chip {
-    cursor: pointer;
 }
 
 .category-wrapper {

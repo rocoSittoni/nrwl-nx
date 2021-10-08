@@ -21,6 +21,12 @@ export class CategoriesFormComponent implements OnInit, OnDestroy {
     'hsl(246, 78%, 56%)', 'hsl(216, 78%, 56%)', 'hsl(182, 78%, 56%)', 'hsl(157, 78%, 56%)',
     'hsl(120, 78%, 56%)', 'hsl(69, 78%, 56%)', 'hsl(34, 78%, 56%)'
   ];
+  // availableColors: ChipColor[] = [
+  //   {name: 'none', color: undefined},
+  //   {name: 'Primary', color: 'primary'},
+  //   {name: 'Accent', color: 'accent'},
+  //   {name: 'Warn', color: 'warn'}
+  // ];
   pickIcons: string[] = [
     'home','build','work','pets','explore','book','create','school','emoji_events',
     'sports_esports','science','tune','smartphone','computer','watch','headset'

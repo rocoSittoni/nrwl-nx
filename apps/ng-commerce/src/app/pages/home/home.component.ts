@@ -24,7 +24,6 @@ export class HomeComponent implements OnInit {
     .pipe(takeUntil(this.endSub$))
     .subscribe((categories) => {
       this.categories = categories;
-      console.log(categories);
     });
   }
 
