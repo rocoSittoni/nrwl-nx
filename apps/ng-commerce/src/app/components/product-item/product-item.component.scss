@@ -1,23 +1,21 @@
 .content {
     overflow: hidden;
-    transition: transform 0.3s ease-in;
-    height: auto;
-    transform: translateY(5rem);
-    transform-origin: bottom;
     font-size: 1rem;
+    justify-content: start;
 }
 
 mat-card {
     width: 14rem;
-    height: 12rem;
+    height: 15rem;
+    text-align: center;
     cursor: pointer;
-    overflow: hidden;
     border-radius: 5px;
+    transition: 0.2s;
     &:hover {
-        height: 15rem;
-        .content {
-            transform: translateY(-0.5rem);
-        }
+        box-shadow: 0px 0px 15px -1px rgba(0,0,0,0.75);
+        -webkit-box-shadow: 0px 0px 15px -1px rgba(0,0,0,0.75);
+        -moz-box-shadow: 0px 0px 15px -1px rgba(0,0,0,0.75);
+        transform: scale(1.01);
     }
 }
 
@@ -27,7 +25,7 @@ img {
     padding-top: 0.5rem;
 }
 
-// .price {
-//     position: relative;
-//     top: 1rem;
-// }
+.price {
+    padding: 0;
+    margin: 0;
+}
