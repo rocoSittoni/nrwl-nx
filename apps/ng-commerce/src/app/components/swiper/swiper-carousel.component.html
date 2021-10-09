@@ -1,21 +1,20 @@
-<div class="swiper-content">
-<swiper
-    #swiper
-    [config]="config"
-    (swiper)="onSwiper($event)"
-    (slideChange)="onSlideChange()">
-
-  <ng-container>
-
-    <ng-template swiperSlide>
-      <app-product-item></app-product-item>
-    </ng-template>
-
-  </ng-container>
-    
-
-  <button (click)="slideNext()">Next slide</button>
-  <button (click)="slidePrev()">Prev slide</button>
-
-</swiper>
+<div class="category-wrapper">
+  <div class="category-name">
+    Technology
+  </div>
+  <div class="swiper-content">
+    <swiper
+        #swiper
+        [config]="config"
+        (swiper)="onSwiper($event)"
+        (slideChange)="onSlideChange()">
+        <ng-container>
+          <ng-template swiperSlide>
+            <app-product-item></app-product-item>
+          </ng-template>
+        </ng-container>    
+      <button (click)="slideNext()">Next slide</button>
+      <button (click)="slidePrev()">Prev slide</button>
+    </swiper>
+  </div>
 </div>

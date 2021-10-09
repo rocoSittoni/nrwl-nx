@@ -14,6 +14,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FeaturedComponent } from './components/featured/featured.component';
 import { ProductItemComponent } from './components/product-item/product-item.component';
 import { ChipsComponent } from './components/chips/chips.component';
+import { ProductsListComponent } from './pages/products-list/products-list.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { ChipsComponent } from './components/chips/chips.component';
     FeaturedComponent,
     ProductItemComponent,
     ChipsComponent,
+    ProductsListComponent,
   ],
   imports: [
     BrowserModule,

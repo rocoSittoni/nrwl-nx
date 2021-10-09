@@ -54,12 +54,12 @@ export class FeaturedComponent implements OnInit, OnDestroy {
   breakpoints = {
     300: { slidesPerView: 1, spaceBetween: 10 },
     640: { slidesPerView: 2, spaceBetween: 20 },
-    768: { slidesPerView: 3, spaceBetween: 50 },
-    1024: { slidesPerView: 4, spaceBetween: 40 },
+    768: { slidesPerView: 2, spaceBetween: 30 },
+    1024: { slidesPerView: 4, spaceBetween: 20 },
   };
 
   config: SwiperOptions = {
-    slidesPerView: 5,
+    slidesPerView: 4,
     spaceBetween: 20,
     navigation: true,
     virtual: true,

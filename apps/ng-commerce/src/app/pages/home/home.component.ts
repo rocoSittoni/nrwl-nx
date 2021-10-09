@@ -8,7 +8,7 @@ import { takeUntil } from 'rxjs/operators';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
 
   categories: Category[] = [];
   endSub$: Subject<any> = new Subject();
