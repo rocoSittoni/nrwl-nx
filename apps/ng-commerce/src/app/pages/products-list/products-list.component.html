@@ -1,1 +1,6 @@
-<p>products-list works!</p>
+    <div class="cards-grid">
+            <app-product-item *ngFor="let product of products"
+                              [product]="product"
+                              class="card">
+            </app-product-item>
+    </div>

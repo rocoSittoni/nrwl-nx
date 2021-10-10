@@ -1,7 +1,7 @@
 <mat-chip-list aria-label="Categories list" *ngFor="let category of categories">
     <mat-chip [ngStyle]="{background: category.color}"
               selected
-              routerLink=" '/products/category/' + category.id">
+              routerLink="/category/{{category.id}}">
         <mat-icon>{{this.category.icon}}</mat-icon>
         {{this.category.name}}
     </mat-chip>

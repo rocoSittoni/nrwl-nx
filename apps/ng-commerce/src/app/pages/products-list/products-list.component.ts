@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { CategoriesService, Category, Product, ProductsService } from '@nx-commerce/products';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -16,11 +17,14 @@ export class ProductsListComponent implements OnInit, OnDestroy {
 
   constructor(
     private categoriesService: CategoriesService,
-    private productsService: ProductsService
+    private productsService: ProductsService,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
-    this._getProducts();
+    this.route.params.subscribe(params => {
+      params.categoryId ? this._getProducts([params.categoryId]) : this._getProducts();
+    });
     this._getCategories();
   }
 
