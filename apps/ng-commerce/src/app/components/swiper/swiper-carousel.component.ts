@@ -1,4 +1,7 @@
-import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ChangeDetectorRef, OnDestroy, Input } from '@angular/core';
+import { Category } from '@nx-commerce/products';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import SwiperCore, { SwiperOptions, Navigation, Virtual } from "swiper";
 import { SwiperComponent } from 'swiper/angular';
 
@@ -12,9 +15,14 @@ SwiperCore.use([
   templateUrl: './swiper-carousel.component.html',
   styleUrls: ['./swiper-carousel.component.scss']
 })
-export class SwiperCarouselComponent implements OnInit {
+export class SwiperCarouselComponent implements OnInit, OnDestroy {
 
-  constructor(private cd: ChangeDetectorRef) { }
+  endSub$: Subject<any> = new Subject();
+  @Input() categories: Category[] = [];
+
+  constructor(
+    private cd: ChangeDetectorRef,
+  ) { }
 
   ngOnInit(): void {
   }
@@ -50,6 +58,10 @@ export class SwiperCarouselComponent implements OnInit {
     centeredSlides: true,
     breakpoints: this.breakpoints,
     loop: true,
+  }
+
+  ngOnDestroy() {
+    this.endSub$.complete();
   }
 
 }
