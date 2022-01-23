@@ -2,7 +2,7 @@
 @import '../../../styles/styles.scss';
 
 body::-webkit-scrollbar {
-    width: 1em;
+    width: 0.7em;
 }
 
 body::-webkit-scrollbar-track {
@@ -13,7 +13,8 @@ body::-webkit-scrollbar-track {
 
 body::-webkit-scrollbar-thumb {
     // background: linear-gradient(rgb(95, 100, 128), rgba(255, 0, 0, 0.801));
-    background: #e637a3;
+    background: #3f51b5b2;
+    // background: #e637a3;
     border-radius: 100vh;
-    border: .15em solid rgb(255, 255, 255);
+    border: .12em solid rgb(255, 255, 255);
 }

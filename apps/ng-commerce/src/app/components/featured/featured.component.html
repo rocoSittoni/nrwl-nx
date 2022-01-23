@@ -6,11 +6,9 @@
         (swiper)="onSwiper($event)"
         (slideChange)="onSlideChange()">
 
-      <ng-container *ngFor="let product of featuredProducts">
-        <ng-template swiperSlide>
+        <ng-template swiperSlide *ngFor="let product of featuredProducts">
           <app-product-item [product]="product"></app-product-item>
         </ng-template>
-      </ng-container>
     
       <button (click)="slideNext()">Next slide</button>
       <button (click)="slidePrev()">Prev slide</button>
