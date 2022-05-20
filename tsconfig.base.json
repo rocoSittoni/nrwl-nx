@@ -21,7 +21,8 @@
             "@nx-commerce/orders": ["libs/orders/src/index.ts"],
             "@nx-commerce/products": ["libs/products/src/index.ts"],
             "@nx-commerce/ui": ["libs/ui/src/index.ts"],
-            "@nx-commerce/users": ["libs/users/src/index.ts"]
+            "@nx-commerce/users": ["libs/users/src/index.ts"],
+            "primeng/*": ["node_modules/primeng-lts/*"]
         }
     },
     "exclude": ["node_modules", "tmp"]

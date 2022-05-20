@@ -18,7 +18,12 @@
                         "tsConfig": "apps/ng-commerce/tsconfig.app.json",
                         "inlineStyleLanguage": "scss",
                         "assets": ["apps/ng-commerce/src/favicon.ico", "apps/ng-commerce/src/assets"],
-                        "styles": ["apps/ng-commerce/src/styles.scss"],
+                        "styles": [
+                            "apps/ng-commerce/src/styles.scss",
+                            "./node_modules/primeicons/primeicons.css",
+                            "./node_modules/primeng-lts/resources/themes/saga-blue/theme.css",
+                            "./node_modules/primeng-lts/resources/primeng.min.css"
+                        ],
                         "scripts": []
                     },
                     "configurations": {

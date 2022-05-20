@@ -15,6 +15,7 @@ import { FeaturedComponent } from './components/featured/featured.component';
 import { ProductItemComponent } from './components/product-item/product-item.component';
 import { ChipsComponent } from './components/chips/chips.component';
 import { ProductsListComponent } from './pages/products-list/products-list.component';
+import { CarouselModule } from 'primeng-lts/carousel';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { ProductsListComponent } from './pages/products-list/products-list.compo
     BrowserAnimationsModule,
     MaterialModule,
     SwiperModule,
-    HttpClientModule
+    HttpClientModule,
+    CarouselModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

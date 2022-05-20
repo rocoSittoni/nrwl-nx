@@ -1,20 +1,37 @@
-<div *ngFor="let category of categoryAndProducts">
+<p-carousel [value]="cars" [numVisible]="3" [numScroll]="1" [responsiveOptions]="responsiveOptions">
+    <ng-template let-car pTemplate="item">
+      Content to display
+    </ng-template>
+</p-carousel>
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="categories" *ngFor="let category of solvedCategories">
   <div class="category-wrapper">
   <div class="category-name">
-    <!-- {{category.name}} -->
+    <h1></h1>
   </div>
   <div class="swiper-content">
-    <!-- <swiper
+    <swiper
         #swiper
         [config]="config"
         (swiper)="onSwiper($event)"
         (slideChange)="onSlideChange()">
-          <ng-template swiperSlide *ngFor="let product of category.products">
+          <ng-template swiperSlide *ngFor="let product of category">
             <app-product-item [product]="product"></app-product-item>
           </ng-template>
       <button (click)="slideNext()">Next slide</button>
       <button (click)="slidePrev()">Prev slide</button>
-    </swiper> -->
+    </swiper>
   </div>
   </div>
-</div>
+</div> -->
