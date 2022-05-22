@@ -2,13 +2,6 @@ import { Component, OnInit, ViewChild, ChangeDetectorRef, OnDestroy } from '@ang
 import { Product, ProductsService } from '@nx-commerce/products';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import SwiperCore, { SwiperOptions, Navigation, Virtual } from "swiper";
-import { SwiperComponent } from 'swiper/angular';
-
-SwiperCore.use([
-  Navigation,
-  Virtual,
-]);
 
 @Component({
   selector: 'app-featured',
@@ -17,13 +10,32 @@ SwiperCore.use([
 })
 export class FeaturedComponent implements OnInit, OnDestroy {
 
+  responsiveOptions: { breakpoint: string; numVisible: number; numScroll: number; }[];
+
   endSub$: Subject<any> = new Subject();
   featuredProducts: Product[] = [];
 
   constructor(
-    private cd: ChangeDetectorRef,
     private productsService: ProductsService
-    ) { }
+    ) {
+      this.responsiveOptions = [
+        {
+            breakpoint: '1024px',
+            numVisible: 3,
+            numScroll: 3
+        },
+        {
+            breakpoint: '768px',
+            numVisible: 2,
+            numScroll: 2
+        },
+        {
+            breakpoint: '560px',
+            numVisible: 1,
+            numScroll: 1
+        }
+      ];
+    }
 
   ngOnInit(): void {
     this._getFeaturedProducts();
@@ -35,39 +47,7 @@ export class FeaturedComponent implements OnInit, OnDestroy {
       this.featuredProducts = products;
     })
   }
-
-  @ViewChild("swiper", { static: false }) swiper?: SwiperComponent;
-  slideNext() {
-    this.swiper.swiperRef.slideNext(100);
-  }
-  slidePrev() {
-    this.swiper.swiperRef.slidePrev(100);
-  }
-
-  onSwiper(swiper: any) {
-    // console.log(swiper);
-  }
-  onSlideChange() {
-    // console.log('slide change');
-  }
-
-  breakpoints = {
-    300: { slidesPerView: 1, spaceBetween: 10 },
-    640: { slidesPerView: 2, spaceBetween: 20 },
-    768: { slidesPerView: 2, spaceBetween: 30 },
-    1024: { slidesPerView: 4, spaceBetween: 20 },
-  };
-
-  config: SwiperOptions = {
-    slidesPerView: 4,
-    spaceBetween: 20,
-    navigation: true,
-    virtual: true,
-    centeredSlides: true,
-    breakpoints: this.breakpoints,
-    loop: true,
-  }
-
+  
   ngOnDestroy() {
     this.endSub$.complete();
   }

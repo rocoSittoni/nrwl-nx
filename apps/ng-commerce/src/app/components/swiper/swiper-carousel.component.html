@@ -4,11 +4,15 @@
       <h1>{{catName[i]}}</h1>
     </div>
     <div class="swiper-content">
-          <p-carousel [value]="category" [numVisible]="5" [numScroll]="1" [responsiveOptions]="responsiveOptions">
+          <p-carousel [value]="category"
+                      [numVisible]="5"
+                      [numScroll]="1" 
+                      [responsiveOptions]="responsiveOptions"
+                      [showIndicators]="false"
+                      [circular]="true">
             <ng-template let-product pTemplate="item">
                 <app-product-item [product]="product"></app-product-item>  
             </ng-template>
-              Content to display
           </p-carousel> 
     </div>
   </div>

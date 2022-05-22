@@ -1,17 +1,22 @@
-<div class="swiper-content">
-  <h1 class="featured">Featured Products</h1>
-    <swiper
-        #swiper
-        [config]="config"
-        (swiper)="onSwiper($event)"
-        (slideChange)="onSlideChange()">
+<div class="category-wrapper">
+  <div class="category-name">
+    <h1>Featured</h1>
+  </div>
 
-        <ng-template swiperSlide *ngFor="let product of featuredProducts">
-          <app-product-item [product]="product"></app-product-item>
-        </ng-template>
-    
-      <button (click)="slideNext()">Next slide</button>
-      <button (click)="slidePrev()">Prev slide</button>
-      
-    </swiper>
+  <div class="swiper-content">
+    <p-carousel [value]="featuredProducts"
+                [numVisible]="5"
+                [numScroll]="1"
+                [responsiveOptions]="responsiveOptions"
+                [autoplayInterval]="3000"
+                [circular]="true"
+                [showIndicators]="false">
+
+      <ng-template let-product pTemplate="item">
+          <app-product-item [product]="product"></app-product-item>  
+      </ng-template>
+
+    </p-carousel>
+  </div>
+
 </div>
