@@ -25,7 +25,8 @@ export class ProductsListComponent implements OnInit, OnDestroy {
     this.route.params.subscribe(params => {
       params.categoryId ? this._getProducts([params.categoryId]) : this._getProducts();
     });
-    this._getCategories();
+    // this._getProducts();
+    // this._getCategories();
   }
 
   private _getProducts(categoriesFilter?: string[]) {
@@ -36,18 +37,19 @@ export class ProductsListComponent implements OnInit, OnDestroy {
     })
   }
 
-  private _getCategories() {
-    this.categoriesService.getCategories().pipe(takeUntil(this.endSub$)).subscribe(categories => {
-      this.categories = categories;
-    })
-  }
+  // private _getCategories() {
+  //   this.categoriesService.getCategories().pipe(takeUntil(this.endSub$)).subscribe(categories => {
+  //     this.categories = categories;
+  //   });
+  //   console.log(this.categories);
+  // }
 
-  categoryFilter() {
-    const selectedCategories = this.categories
-      .filter(category => category.checked)
-      .map(category => category.id);
-    this._getProducts(selectedCategories)
-  }
+  // categoryFilter() {
+  //   const selectedCategories = this.categories
+  //     .filter(category => category.checked)
+  //     .map(category => category.id);
+  //   this._getProducts(selectedCategories)
+  // }
 
   ngOnDestroy() {
     this.endSub$.complete();

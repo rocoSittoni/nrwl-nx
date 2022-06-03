@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Product, products } from '@nx-commerce/products';
 
 @Component({
@@ -10,7 +11,9 @@ export class ProductItemComponent implements OnInit {
 
   @Input() product: Product;
 
-  constructor() { }
+  constructor(
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
   }

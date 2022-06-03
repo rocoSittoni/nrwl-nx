@@ -1,7 +1,10 @@
 <div class="categories" *ngFor="let category of solvedCategories; let i = index">
   <div class="category-wrapper">
     <div class="category-name">
-      <h1>{{catName[i]}}</h1>
+      <h1>
+        {{catName[i]}}
+        <a routerLink="/category/{{category[0].category}}" style="font-size: 14px;">See More</a>
+      </h1>
     </div>
     <div class="swiper-content">
           <p-carousel [value]="category"

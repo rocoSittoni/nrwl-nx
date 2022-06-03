@@ -1,4 +1,4 @@
-<mat-card *ngIf="product">
+<mat-card *ngIf="product" [routerLink]="['/products/', product.category.id]">
     <img mat-card-image [src]="product.image" alt="product">
     <mat-card-content>
         <h2 class="price">{{product.price | currency}}</h2>
