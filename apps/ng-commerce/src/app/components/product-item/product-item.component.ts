@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Product, products } from '@nx-commerce/products';
+import { Product } from '@nx-commerce/products';
 
 @Component({
   selector: 'app-product-item',

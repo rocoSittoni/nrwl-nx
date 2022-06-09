@@ -1,13 +1,44 @@
-<div class="product-page">
-    <div class="p-grid">
-        <div class="p-col-6">
+<div class="product-page" *ngIf="product">
+    <div class="product-grid">
+        <div class="gallery">
             <!-- UI gallery -->
         </div>
-        <div class="p-col-6 product" *ngIf="product">
-            <h2>{{product.name}}</h2>
+        <div class="product">
+            <h1 class="product-name">{{product.name}}</h1>
             <p class="product-desc">
                 {{product.description}}
             </p>
+            <div class="product-rating">
+                <h4 class="rating-label">Rating</h4>
+                <p-rating [(ngModel)]="product.rating" [cancel]="false" [disabled]="true"></p-rating>
+            </div>
+            <div class="product-price">
+                {{product.price | currency}}
+                <span class="price-before">{{product.price + 18 | currency}}</span>
+            </div>
+            <div class="product-quantity">
+                <div class="field">
+                    <label for="quantity">Quantity</label>
+                    <input type="number"
+                           [(ngModel)]="quantity"
+                           [min]="0"
+                           [max]="100"
+                           id="quantity">
+                </div>
+            </div>
+            <div class="product-actions">
+                <button mat-raised-button label="Buy Now" class="buy-now">
+                    Buy Now
+                </button>
+                <button mat-raised-button label="Add to Cart" class="add-to-cart">
+                    Add to Cart
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="bottom-grid rich-description">
+        <div class="">
+            <div [innerHtml]="product.richDescription"></div>
         </div>
     </div>
 </div>

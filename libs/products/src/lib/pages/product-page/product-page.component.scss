@@ -1,0 +1,66 @@
+.product-page {
+    width: 100%;
+    height: 100%;
+}
+
+.product-grid {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+.gallery {
+    width: 50%;
+}
+
+.product {
+    width: 50%;
+    &-name {
+        font-size: 2em;
+    }
+    &-desc {
+        font-size: 1.4em;
+    }
+    &-rating {
+        margin: 15px 0;
+        .rating-label {
+            color: grey;
+        }
+    }
+    &-price {
+        font-size: 1.4em;
+        font-weight: 600;
+        border-bottom: 1px solid grey;
+        padding: 25px 0;
+    }
+    .price-before {
+        font-size: 0.8em;
+        margin-left: 10px;
+        font-weight: 300;
+        color: grey;
+        text-decoration: line-through;
+    }
+    &-quantity {
+        margin: 25px 0;
+        &-field {
+            padding: 0;
+        }
+    }
+    label {
+        font-size: 1.2em;
+    }
+    &-actions {
+        .buy-now {
+            background-color: purple;
+            border: 0;
+        }
+        .add-to-cart {
+            background-color: red;
+            border: 0;
+        }
+    }
+}
+
+.rich-description {
+    line-height: 1.6;
+}

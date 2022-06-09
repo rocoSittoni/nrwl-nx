@@ -13,6 +13,7 @@ export class ProductPageComponent implements OnInit, OnDestroy {
 
   product: Product;
   endSub$: Subject<any> = new Subject(); 
+  quantity: number;
 
   constructor(
     private productsService: ProductsService,
@@ -31,6 +32,10 @@ export class ProductPageComponent implements OnInit, OnDestroy {
     this.productsService.getProduct(id).pipe(takeUntil(this.endSub$)).subscribe(product => {
       this.product = product;
     });
+  }
+
+  addProductToCart() {
+    
   }
 
   ngOnDestroy() {

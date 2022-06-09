@@ -17,6 +17,7 @@ import { ChipsComponent } from './components/chips/chips.component';
 import { ProductsListComponent } from './pages/products-list/products-list.component';
 import { CarouselModule } from 'primeng-lts/carousel';
 import { ProductPageComponent } from '@nx-commerce/products';
+import { ProductsModule } from '@nx-commerce/products'
 
 @NgModule({
   declarations: [
@@ -29,7 +30,6 @@ import { ProductPageComponent } from '@nx-commerce/products';
     ProductItemComponent,
     ChipsComponent,
     ProductsListComponent,
-    ProductPageComponent
   ],
   imports: [
     BrowserModule,
@@ -39,6 +39,7 @@ import { ProductPageComponent } from '@nx-commerce/products';
     SwiperModule,
     HttpClientModule,
     CarouselModule,
+    ProductsModule
   ],
   providers: [],
   bootstrap: [AppComponent],

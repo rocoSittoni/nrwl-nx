@@ -6,8 +6,9 @@ import { ProductPageComponent } from '@nx-commerce/products';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'product/:productId', component: ProductPageComponent},
-  { path: 'category/:categoryId', component: ProductsListComponent }
+  { path: 'products/:productId', component: ProductPageComponent },
+  { path: 'category/:categoryId', component: ProductsListComponent },
+  { path: '**', component: HomeComponent },
 ];
 
 @NgModule({
