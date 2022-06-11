@@ -1,0 +1,64 @@
+<div class="product-page" *ngIf="product">
+    <div class="product-grid">
+        <div class="gallery">
+            <p-galleria *ngIf="product.images" [value]="images" [responsiveOptions]="responsiveOptions" [containerStyle]="{'max-width': '800px'}" [numVisible]="7"> 
+                <ng-template pTemplate="item" let-item>
+                    <img [src]="item.previewImageSrc" style="width: 100%; display: block;"/>
+                </ng-template>
+                <ng-template pTemplate="thumbnail" let-item>
+                    <div class="grid grid-nogutter justify-content-center">
+                        <img [src]="item.thumbnailImageSrc" style="display: block;"/>
+                    </div>
+                </ng-template>
+            </p-galleria>
+        </div>
+        <div class="product">
+            <h1 class="product-name">{{product.name}}</h1>
+            <p class="product-desc">
+                {{product.description}}
+            </p>
+            <div class="product-rating" *ngIf="product.rating">
+                <h4 class="rating-label">Rating</h4>
+                <p-rating [(ngModel)]="product.rating" [cancel]="false" [disabled]="true"></p-rating>
+            </div>
+            <div class="product-rating" *ngIf="!product.rating">
+                <h4 class="rating-label">Rating</h4>
+                <p-rating [(ngModel)]="mockedRating" [cancel]="false" [disabled]="true"></p-rating>
+            </div>
+            <div class="product-price">
+                {{product.price | currency}}
+                <span class="price-before">{{product.price + 18 | currency}}</span>
+            </div>
+            <div class="product-quantity">
+                <div class="field">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Quantity</mat-label>
+                        <input 
+                        matInput
+                        type="number"
+                        [(ngModel)]="quantity"
+                        [min]="0"
+                        [max]="300"
+                        required=""
+                        id="quantity">
+                    <mat-error>Must pick a number</mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <h3 style="color: green;">Free shipping!</h3>
+            <div class="product-actions">
+                <button mat-raised-button color="primary" label="Buy Now" class="buy-now">
+                    Buy Now
+                </button>
+                <button mat-raised-button color="accent" label="Add to Cart" class="add-to-cart">
+                    Add to Cart
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="bottom-grid rich-description">
+        <div class="">
+            <div [innerHtml]="product.richDescription"></div>
+        </div>
+    </div>
+</div>

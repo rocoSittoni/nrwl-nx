@@ -18,6 +18,9 @@ import { ProductsListComponent } from './pages/products-list/products-list.compo
 import { CarouselModule } from 'primeng-lts/carousel';
 import { ProductPageComponent } from '@nx-commerce/products';
 import { ProductsModule } from '@nx-commerce/products'
+import { RatingModule } from 'primeng-lts/rating';
+import { FormsModule } from '@angular/forms';
+import {GalleriaModule} from 'primeng/galleria';
 
 @NgModule({
   declarations: [
@@ -30,6 +33,7 @@ import { ProductsModule } from '@nx-commerce/products'
     ProductItemComponent,
     ChipsComponent,
     ProductsListComponent,
+    ProductPageComponent
   ],
   imports: [
     BrowserModule,
@@ -39,7 +43,11 @@ import { ProductsModule } from '@nx-commerce/products'
     SwiperModule,
     HttpClientModule,
     CarouselModule,
-    ProductsModule
+    ProductsModule,
+    RatingModule,
+    FormsModule,
+    GalleriaModule
+    
   ],
   providers: [],
   bootstrap: [AppComponent],

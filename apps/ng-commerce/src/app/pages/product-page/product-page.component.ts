@@ -14,6 +14,30 @@ export class ProductPageComponent implements OnInit, OnDestroy {
   product: Product;
   endSub$: Subject<any> = new Subject(); 
   quantity: number;
+  mockedRating = 5;
+
+
+  images: any[];
+
+  responsiveOptions:any[] = [
+      {
+          breakpoint: '1024px',
+          numVisible: 5
+      },
+      {
+          breakpoint: '960px',
+          numVisible: 4
+      },
+      {
+          breakpoint: '768px',
+          numVisible: 3
+      },
+      {
+          breakpoint: '560px',
+          numVisible: 1
+      }
+  ];
+
 
   constructor(
     private productsService: ProductsService,
@@ -26,6 +50,7 @@ export class ProductPageComponent implements OnInit, OnDestroy {
         this._getProduct(params.productId);
       }
     });
+    this.images = ['']
   }
 
   private _getProduct(id: string) {
