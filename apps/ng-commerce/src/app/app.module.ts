@@ -16,11 +16,11 @@ import { ProductItemComponent } from './components/product-item/product-item.com
 import { ChipsComponent } from './components/chips/chips.component';
 import { ProductsListComponent } from './pages/products-list/products-list.component';
 import { CarouselModule } from 'primeng-lts/carousel';
-import { ProductPageComponent } from '@nx-commerce/products';
+import { ProductPageComponent } from './pages/product-page/product-page.component';
 import { ProductsModule } from '@nx-commerce/products'
 import { RatingModule } from 'primeng-lts/rating';
 import { FormsModule } from '@angular/forms';
-import {GalleriaModule} from 'primeng/galleria';
+import { GalleriaModule } from 'primeng/galleria';
 
 @NgModule({
   declarations: [
