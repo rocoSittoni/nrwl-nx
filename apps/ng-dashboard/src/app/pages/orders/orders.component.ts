@@ -18,7 +18,7 @@ import { takeUntil } from 'rxjs/operators';
 export class OrdersComponent implements OnInit, OnDestroy {
 
   orders: Order[] = []
-  displayedColumns: String[] = ['user', 'totalPrice', 'dateOrdered', 'status', 'actions'];
+  displayedColumns: String[] = [ 'user', 'totalPrice', 'dateOrdered', 'status', 'actions'];
   dataSource = new MatTableDataSource<Order>(this.orders);
   orderStatus = ORDER_STATUS;
   endSub$: Subject<any> = new Subject();
@@ -34,13 +34,13 @@ export class OrdersComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this._getOrders();
   }
-
+  
   private _getOrders() {
     this.ordersService.getOrders()
     .pipe(takeUntil(this.endSub$))
     .subscribe((orders) => {
       this.orders = orders;
-    })
+    });
   }
 
   showOrder(orderId: string) {
@@ -90,6 +90,7 @@ export class OrdersComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
+    this.endSub$.next();
     this.endSub$.complete();
   }
 
