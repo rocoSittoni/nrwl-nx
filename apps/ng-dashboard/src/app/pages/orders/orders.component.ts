@@ -18,9 +18,12 @@ import { takeUntil } from 'rxjs/operators';
 export class OrdersComponent implements OnInit, OnDestroy {
 
   orders: Order[] = []
-  displayedColumns: String[] = [ 'user', 'totalPrice', 'dateOrdered', 'status', 'actions'];
+  statuses = ORDER_STATUS;
+  mapedStatuses: any[] = [];
+  // orderStatus: any;
+
+  displayedColumns: String[] = ['user', 'totalPrice', 'dateOrdered', 'status', 'actions'];
   dataSource = new MatTableDataSource<Order>(this.orders);
-  orderStatus = ORDER_STATUS;
   endSub$: Subject<any> = new Subject();
 
   constructor(
@@ -40,6 +43,7 @@ export class OrdersComponent implements OnInit, OnDestroy {
     .pipe(takeUntil(this.endSub$))
     .subscribe((orders) => {
       this.orders = orders;
+      this._mapStatuses()
     });
   }
 
@@ -84,6 +88,23 @@ export class OrdersComponent implements OnInit, OnDestroy {
   }
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
+
+  private _mapStatuses() {
+    this.mapedStatuses = Object.keys(ORDER_STATUS).map((key) => {
+      return {
+        id: key,
+        name: ORDER_STATUS[key].label
+      }
+    });
+    this._asignStatus();
+  }
+  
+  private _asignStatus() {
+    for(let order of this.orders) {
+      let myOrder = this.mapedStatuses.filter(status => status.id == order.status);
+      order.status = myOrder[0].name;
+    }
+  }
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;

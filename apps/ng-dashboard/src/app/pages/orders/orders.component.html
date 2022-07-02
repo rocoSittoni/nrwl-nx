@@ -35,8 +35,10 @@
                 <th mat-header-cell *matHeaderCellDef> Status </th>
                 <td mat-cell *matCellDef="let orders">
                   <mat-chip-list>
-                    <mat-chip selected [ngStyle]="{'background-color': orderStatus[1].color}">
-                      {{orderStatus[0].label}}
+                    <mat-chip 
+                      selected 
+                      [ngStyle]="{'background-color': orders.color}">
+                      {{orders.status}}
                     </mat-chip>
                   </mat-chip-list>
                 </td>

@@ -42,7 +42,7 @@ import { OrdersDetailComponent } from './pages/orders/orders-detail/orders-detai
         ConfirmDialogComponent,
         ProductsFormComponent,
         UsersFormComponent,
-        OrdersDetailComponent
+        OrdersDetailComponent,
     ],
     imports: [
         BrowserModule,
